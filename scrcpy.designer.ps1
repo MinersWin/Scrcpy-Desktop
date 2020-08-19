@@ -10,6 +10,8 @@ $Form1 = New-Object -TypeName System.Windows.Forms.Form
 [System.Windows.Forms.Label]$Label5 = $null
 [System.Windows.Forms.TextBox]$TextBox4 = $null
 [System.Windows.Forms.Panel]$Panel1 = $null
+[System.Windows.Forms.TextBox]$TextBox7 = $null
+[System.Windows.Forms.Label]$Label6 = $null
 [System.Windows.Forms.Panel]$Panel4 = $null
 [System.Windows.Forms.CheckBox]$CheckBox3 = $null
 [System.Windows.Forms.TextBox]$TextBox6 = $null
@@ -48,6 +50,8 @@ $Panel4 = (New-Object -TypeName System.Windows.Forms.Panel)
 $CheckBox2 = (New-Object -TypeName System.Windows.Forms.CheckBox)
 $TextBox6 = (New-Object -TypeName System.Windows.Forms.TextBox)
 $CheckBox3 = (New-Object -TypeName System.Windows.Forms.CheckBox)
+$Label6 = (New-Object -TypeName System.Windows.Forms.Label)
+$TextBox7 = (New-Object -TypeName System.Windows.Forms.TextBox)
 ([System.ComponentModel.ISupportInitialize]$PictureBox1).BeginInit()
 $Panel1.SuspendLayout()
 $Panel2.SuspendLayout()
@@ -147,6 +151,8 @@ $TextBox4.Text = [System.String]'15'
 #Panel1
 #
 $Panel1.AutoScroll = $true
+$Panel1.Controls.Add($TextBox7)
+$Panel1.Controls.Add($Label6)
 $Panel1.Controls.Add($Panel4)
 $Panel1.Controls.Add($Panel3)
 $Panel1.Controls.Add($Panel2)
@@ -288,6 +294,23 @@ $CheckBox3.Text = [System.String]'No Display'
 $CheckBox3.UseCompatibleTextRendering = $true
 $CheckBox3.UseVisualStyleBackColor = $true
 #
+#Label6
+#
+$Label6.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]219))
+$Label6.Name = [System.String]'Label6'
+$Label6.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]100,[System.Int32]23))
+$Label6.TabIndex = [System.Int32]14
+$Label6.Text = [System.String]'Window Title'
+$Label6.UseCompatibleTextRendering = $true
+#
+#TextBox7
+#
+$TextBox7.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]245))
+$TextBox7.Name = [System.String]'TextBox7'
+$TextBox7.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]173,[System.Int32]24))
+$TextBox7.TabIndex = [System.Int32]15
+$TextBox7.Text = [System.String]'My Device'
+#
 #Form1
 #
 $Form1.ClientSize = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]538,[System.Int32]573))
@@ -318,6 +341,8 @@ Add-Member -InputObject $Form1 -Name TextBox3 -Value $TextBox3 -MemberType NoteP
 Add-Member -InputObject $Form1 -Name Label5 -Value $Label5 -MemberType NoteProperty
 Add-Member -InputObject $Form1 -Name TextBox4 -Value $TextBox4 -MemberType NoteProperty
 Add-Member -InputObject $Form1 -Name Panel1 -Value $Panel1 -MemberType NoteProperty
+Add-Member -InputObject $Form1 -Name TextBox7 -Value $TextBox7 -MemberType NoteProperty
+Add-Member -InputObject $Form1 -Name Label6 -Value $Label6 -MemberType NoteProperty
 Add-Member -InputObject $Form1 -Name Panel4 -Value $Panel4 -MemberType NoteProperty
 Add-Member -InputObject $Form1 -Name CheckBox3 -Value $CheckBox3 -MemberType NoteProperty
 Add-Member -InputObject $Form1 -Name TextBox6 -Value $TextBox6 -MemberType NoteProperty
