@@ -10,6 +10,9 @@ $Form1 = New-Object -TypeName System.Windows.Forms.Form
 [System.Windows.Forms.Label]$Label5 = $null
 [System.Windows.Forms.TextBox]$TextBox4 = $null
 [System.Windows.Forms.Panel]$Panel1 = $null
+[System.Windows.Forms.Panel]$Panel2 = $null
+[System.Windows.Forms.TextBox]$TextBox5 = $null
+[System.Windows.Forms.CheckBox]$CheckBox1 = $null
 function InitializeComponent
 {
 $resources = . (Join-Path $PSScriptRoot 'scrcpy.resources.ps1')
@@ -24,8 +27,12 @@ $TextBox3 = (New-Object -TypeName System.Windows.Forms.TextBox)
 $Label5 = (New-Object -TypeName System.Windows.Forms.Label)
 $TextBox4 = (New-Object -TypeName System.Windows.Forms.TextBox)
 $Panel1 = (New-Object -TypeName System.Windows.Forms.Panel)
+$CheckBox1 = (New-Object -TypeName System.Windows.Forms.CheckBox)
+$Panel2 = (New-Object -TypeName System.Windows.Forms.Panel)
+$TextBox5 = (New-Object -TypeName System.Windows.Forms.TextBox)
 ([System.ComponentModel.ISupportInitialize]$PictureBox1).BeginInit()
 $Panel1.SuspendLayout()
+$Panel2.SuspendLayout()
 $Form1.SuspendLayout()
 #
 #Label1
@@ -120,6 +127,7 @@ $TextBox4.Text = [System.String]'15'
 #Panel1
 #
 $Panel1.AutoScroll = $true
+$Panel1.Controls.Add($Panel2)
 $Panel1.Controls.Add($TextBox1)
 $Panel1.Controls.Add($TextBox4)
 $Panel1.Controls.Add($Label2)
@@ -133,6 +141,35 @@ $Panel1.Name = [System.String]'Panel1'
 $Panel1.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]514,[System.Int32]439))
 $Panel1.TabIndex = [System.Int32]10
 #
+#CheckBox1
+#
+$CheckBox1.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]3))
+$CheckBox1.Name = [System.String]'CheckBox1'
+$CheckBox1.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]104,[System.Int32]24))
+$CheckBox1.TabIndex = [System.Int32]10
+$CheckBox1.Text = [System.String]'Crop Screen'
+$CheckBox1.UseCompatibleTextRendering = $true
+$CheckBox1.UseVisualStyleBackColor = $true
+#
+#Panel2
+#
+$Panel2.BorderStyle = [System.Windows.Forms.BorderStyle]::FixedSingle
+$Panel2.Controls.Add($TextBox5)
+$Panel2.Controls.Add($CheckBox1)
+$Panel2.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]195,[System.Int32]10))
+$Panel2.Name = [System.String]'Panel2'
+$Panel2.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]200,[System.Int32]73))
+$Panel2.TabIndex = [System.Int32]11
+#
+#TextBox5
+#
+$TextBox5.Enabled = $false
+$TextBox5.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]-1,[System.Int32]33))
+$TextBox5.Name = [System.String]'TextBox5'
+$TextBox5.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]196,[System.Int32]24))
+$TextBox5.TabIndex = [System.Int32]11
+$TextBox5.Text = [System.String]'1224:1440:0:0'
+#
 #Form1
 #
 $Form1.ClientSize = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]538,[System.Int32]573))
@@ -145,6 +182,8 @@ $Form1.Text = [System.String]'TGF Scrcpy Client'
 ([System.ComponentModel.ISupportInitialize]$PictureBox1).EndInit()
 $Panel1.ResumeLayout($false)
 $Panel1.PerformLayout()
+$Panel2.ResumeLayout($false)
+$Panel2.PerformLayout()
 $Form1.ResumeLayout($false)
 Add-Member -InputObject $Form1 -Name base -Value $base -MemberType NoteProperty
 Add-Member -InputObject $Form1 -Name Label1 -Value $Label1 -MemberType NoteProperty
@@ -158,5 +197,8 @@ Add-Member -InputObject $Form1 -Name TextBox3 -Value $TextBox3 -MemberType NoteP
 Add-Member -InputObject $Form1 -Name Label5 -Value $Label5 -MemberType NoteProperty
 Add-Member -InputObject $Form1 -Name TextBox4 -Value $TextBox4 -MemberType NoteProperty
 Add-Member -InputObject $Form1 -Name Panel1 -Value $Panel1 -MemberType NoteProperty
+Add-Member -InputObject $Form1 -Name Panel2 -Value $Panel2 -MemberType NoteProperty
+Add-Member -InputObject $Form1 -Name TextBox5 -Value $TextBox5 -MemberType NoteProperty
+Add-Member -InputObject $Form1 -Name CheckBox1 -Value $CheckBox1 -MemberType NoteProperty
 }
 . InitializeComponent
