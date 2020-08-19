@@ -11,6 +11,7 @@ $Form1 = New-Object -TypeName System.Windows.Forms.Form
 [System.Windows.Forms.TextBox]$TextBox4 = $null
 [System.Windows.Forms.Panel]$Panel1 = $null
 [System.Windows.Forms.Panel]$Panel4 = $null
+[System.Windows.Forms.CheckBox]$CheckBox3 = $null
 [System.Windows.Forms.TextBox]$TextBox6 = $null
 [System.Windows.Forms.CheckBox]$CheckBox2 = $null
 [System.Windows.Forms.Panel]$Panel3 = $null
@@ -46,6 +47,7 @@ $RadioButton4 = (New-Object -TypeName System.Windows.Forms.RadioButton)
 $Panel4 = (New-Object -TypeName System.Windows.Forms.Panel)
 $CheckBox2 = (New-Object -TypeName System.Windows.Forms.CheckBox)
 $TextBox6 = (New-Object -TypeName System.Windows.Forms.TextBox)
+$CheckBox3 = (New-Object -TypeName System.Windows.Forms.CheckBox)
 ([System.ComponentModel.ISupportInitialize]$PictureBox1).BeginInit()
 $Panel1.SuspendLayout()
 $Panel2.SuspendLayout()
@@ -249,6 +251,7 @@ $RadioButton4.UseVisualStyleBackColor = $true
 #Panel4
 #
 $Panel4.BorderStyle = [System.Windows.Forms.BorderStyle]::FixedSingle
+$Panel4.Controls.Add($CheckBox3)
 $Panel4.Controls.Add($TextBox6)
 $Panel4.Controls.Add($CheckBox2)
 $Panel4.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]195,[System.Int32]222))
@@ -260,7 +263,7 @@ $Panel4.TabIndex = [System.Int32]13
 #
 $CheckBox2.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]3))
 $CheckBox2.Name = [System.String]'CheckBox2'
-$CheckBox2.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]192,[System.Int32]24))
+$CheckBox2.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]77,[System.Int32]24))
 $CheckBox2.TabIndex = [System.Int32]0
 $CheckBox2.Text = [System.String]'Record'
 $CheckBox2.UseCompatibleTextRendering = $true
@@ -274,6 +277,16 @@ $TextBox6.Name = [System.String]'TextBox6'
 $TextBox6.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]192,[System.Int32]24))
 $TextBox6.TabIndex = [System.Int32]1
 $TextBox6.Text = [System.String]'file.mp4'
+#
+#CheckBox3
+#
+$CheckBox3.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]95,[System.Int32]3))
+$CheckBox3.Name = [System.String]'CheckBox3'
+$CheckBox3.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]104,[System.Int32]24))
+$CheckBox3.TabIndex = [System.Int32]2
+$CheckBox3.Text = [System.String]'No Display'
+$CheckBox3.UseCompatibleTextRendering = $true
+$CheckBox3.UseVisualStyleBackColor = $true
 #
 #Form1
 #
@@ -306,6 +319,7 @@ Add-Member -InputObject $Form1 -Name Label5 -Value $Label5 -MemberType NotePrope
 Add-Member -InputObject $Form1 -Name TextBox4 -Value $TextBox4 -MemberType NoteProperty
 Add-Member -InputObject $Form1 -Name Panel1 -Value $Panel1 -MemberType NoteProperty
 Add-Member -InputObject $Form1 -Name Panel4 -Value $Panel4 -MemberType NoteProperty
+Add-Member -InputObject $Form1 -Name CheckBox3 -Value $CheckBox3 -MemberType NoteProperty
 Add-Member -InputObject $Form1 -Name TextBox6 -Value $TextBox6 -MemberType NoteProperty
 Add-Member -InputObject $Form1 -Name CheckBox2 -Value $CheckBox2 -MemberType NoteProperty
 Add-Member -InputObject $Form1 -Name Panel3 -Value $Panel3 -MemberType NoteProperty
