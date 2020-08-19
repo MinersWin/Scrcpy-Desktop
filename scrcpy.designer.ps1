@@ -5,6 +5,10 @@ $Form1 = New-Object -TypeName System.Windows.Forms.Form
 [System.Windows.Forms.TextBox]$TextBox1 = $null
 [System.Windows.Forms.Label]$Label3 = $null
 [System.Windows.Forms.TextBox]$TextBox2 = $null
+[System.Windows.Forms.Label]$Label4 = $null
+[System.Windows.Forms.TextBox]$TextBox3 = $null
+[System.Windows.Forms.Label]$Label5 = $null
+[System.Windows.Forms.TextBox]$TextBox4 = $null
 function InitializeComponent
 {
 $resources = . (Join-Path $PSScriptRoot 'scrcpy.resources.ps1')
@@ -14,6 +18,10 @@ $Label2 = (New-Object -TypeName System.Windows.Forms.Label)
 $TextBox1 = (New-Object -TypeName System.Windows.Forms.TextBox)
 $Label3 = (New-Object -TypeName System.Windows.Forms.Label)
 $TextBox2 = (New-Object -TypeName System.Windows.Forms.TextBox)
+$Label4 = (New-Object -TypeName System.Windows.Forms.Label)
+$TextBox3 = (New-Object -TypeName System.Windows.Forms.TextBox)
+$Label5 = (New-Object -TypeName System.Windows.Forms.Label)
+$TextBox4 = (New-Object -TypeName System.Windows.Forms.TextBox)
 ([System.ComponentModel.ISupportInitialize]$PictureBox1).BeginInit()
 $Form1.SuspendLayout()
 #
@@ -72,9 +80,47 @@ $TextBox2.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([Syst
 $TextBox2.TabIndex = [System.Int32]5
 $TextBox2.Text = [System.String]'1080'
 #
+#Label4
+#
+$Label4.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]12,[System.Int32]221))
+$Label4.Name = [System.String]'Label4'
+$Label4.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]100,[System.Int32]23))
+$Label4.TabIndex = [System.Int32]6
+$Label4.Text = [System.String]'Bitrate'
+$Label4.UseCompatibleTextRendering = $true
+#
+#TextBox3
+#
+$TextBox3.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]12,[System.Int32]247))
+$TextBox3.Name = [System.String]'TextBox3'
+$TextBox3.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]173,[System.Int32]24))
+$TextBox3.TabIndex = [System.Int32]7
+$TextBox3.Text = [System.String]'2M'
+#
+#Label5
+#
+$Label5.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]12,[System.Int32]274))
+$Label5.Name = [System.String]'Label5'
+$Label5.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]100,[System.Int32]23))
+$Label5.TabIndex = [System.Int32]8
+$Label5.Text = [System.String]'max FPS'
+$Label5.UseCompatibleTextRendering = $true
+#
+#TextBox4
+#
+$TextBox4.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]12,[System.Int32]300))
+$TextBox4.Name = [System.String]'TextBox4'
+$TextBox4.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]173,[System.Int32]24))
+$TextBox4.TabIndex = [System.Int32]9
+$TextBox4.Text = [System.String]'15'
+#
 #Form1
 #
 $Form1.ClientSize = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]538,[System.Int32]573))
+$Form1.Controls.Add($TextBox4)
+$Form1.Controls.Add($Label5)
+$Form1.Controls.Add($TextBox3)
+$Form1.Controls.Add($Label4)
 $Form1.Controls.Add($TextBox2)
 $Form1.Controls.Add($Label3)
 $Form1.Controls.Add($TextBox1)
@@ -94,5 +140,9 @@ Add-Member -InputObject $Form1 -Name Label2 -Value $Label2 -MemberType NotePrope
 Add-Member -InputObject $Form1 -Name TextBox1 -Value $TextBox1 -MemberType NoteProperty
 Add-Member -InputObject $Form1 -Name Label3 -Value $Label3 -MemberType NoteProperty
 Add-Member -InputObject $Form1 -Name TextBox2 -Value $TextBox2 -MemberType NoteProperty
+Add-Member -InputObject $Form1 -Name Label4 -Value $Label4 -MemberType NoteProperty
+Add-Member -InputObject $Form1 -Name TextBox3 -Value $TextBox3 -MemberType NoteProperty
+Add-Member -InputObject $Form1 -Name Label5 -Value $Label5 -MemberType NoteProperty
+Add-Member -InputObject $Form1 -Name TextBox4 -Value $TextBox4 -MemberType NoteProperty
 }
 . InitializeComponent
