@@ -9,6 +9,7 @@ $Form1 = New-Object -TypeName System.Windows.Forms.Form
 [System.Windows.Forms.TextBox]$TextBox3 = $null
 [System.Windows.Forms.Label]$Label5 = $null
 [System.Windows.Forms.TextBox]$TextBox4 = $null
+[System.Windows.Forms.Panel]$Panel1 = $null
 function InitializeComponent
 {
 $resources = . (Join-Path $PSScriptRoot 'scrcpy.resources.ps1')
@@ -22,7 +23,9 @@ $Label4 = (New-Object -TypeName System.Windows.Forms.Label)
 $TextBox3 = (New-Object -TypeName System.Windows.Forms.TextBox)
 $Label5 = (New-Object -TypeName System.Windows.Forms.Label)
 $TextBox4 = (New-Object -TypeName System.Windows.Forms.TextBox)
+$Panel1 = (New-Object -TypeName System.Windows.Forms.Panel)
 ([System.ComponentModel.ISupportInitialize]$PictureBox1).BeginInit()
+$Panel1.SuspendLayout()
 $Form1.SuspendLayout()
 #
 #Label1
@@ -47,7 +50,7 @@ $PictureBox1.TabStop = $false
 #
 #Label2
 #
-$Label2.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]12,[System.Int32]115))
+$Label2.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]7))
 $Label2.Name = [System.String]'Label2'
 $Label2.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]100,[System.Int32]23))
 $Label2.TabIndex = [System.Int32]2
@@ -57,7 +60,7 @@ $Label2.add_Click($Label2_Click)
 #
 #TextBox1
 #
-$TextBox1.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]12,[System.Int32]141))
+$TextBox1.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]33))
 $TextBox1.Name = [System.String]'TextBox1'
 $TextBox1.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]173,[System.Int32]24))
 $TextBox1.TabIndex = [System.Int32]3
@@ -65,7 +68,7 @@ $TextBox1.Text = [System.String]'127.0.0.1'
 #
 #Label3
 #
-$Label3.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]12,[System.Int32]168))
+$Label3.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]60))
 $Label3.Name = [System.String]'Label3'
 $Label3.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]100,[System.Int32]23))
 $Label3.TabIndex = [System.Int32]4
@@ -74,7 +77,7 @@ $Label3.UseCompatibleTextRendering = $true
 #
 #TextBox2
 #
-$TextBox2.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]12,[System.Int32]194))
+$TextBox2.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]86))
 $TextBox2.Name = [System.String]'TextBox2'
 $TextBox2.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]173,[System.Int32]24))
 $TextBox2.TabIndex = [System.Int32]5
@@ -82,7 +85,7 @@ $TextBox2.Text = [System.String]'1080'
 #
 #Label4
 #
-$Label4.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]12,[System.Int32]221))
+$Label4.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]113))
 $Label4.Name = [System.String]'Label4'
 $Label4.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]100,[System.Int32]23))
 $Label4.TabIndex = [System.Int32]6
@@ -91,7 +94,7 @@ $Label4.UseCompatibleTextRendering = $true
 #
 #TextBox3
 #
-$TextBox3.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]12,[System.Int32]247))
+$TextBox3.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]139))
 $TextBox3.Name = [System.String]'TextBox3'
 $TextBox3.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]173,[System.Int32]24))
 $TextBox3.TabIndex = [System.Int32]7
@@ -99,7 +102,7 @@ $TextBox3.Text = [System.String]'2M'
 #
 #Label5
 #
-$Label5.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]12,[System.Int32]274))
+$Label5.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]166))
 $Label5.Name = [System.String]'Label5'
 $Label5.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]100,[System.Int32]23))
 $Label5.TabIndex = [System.Int32]8
@@ -108,31 +111,41 @@ $Label5.UseCompatibleTextRendering = $true
 #
 #TextBox4
 #
-$TextBox4.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]12,[System.Int32]300))
+$TextBox4.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]192))
 $TextBox4.Name = [System.String]'TextBox4'
 $TextBox4.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]173,[System.Int32]24))
 $TextBox4.TabIndex = [System.Int32]9
 $TextBox4.Text = [System.String]'15'
 #
+#Panel1
+#
+$Panel1.AutoScroll = $true
+$Panel1.Controls.Add($TextBox1)
+$Panel1.Controls.Add($TextBox4)
+$Panel1.Controls.Add($Label2)
+$Panel1.Controls.Add($Label5)
+$Panel1.Controls.Add($Label3)
+$Panel1.Controls.Add($TextBox3)
+$Panel1.Controls.Add($TextBox2)
+$Panel1.Controls.Add($Label4)
+$Panel1.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]12,[System.Int32]114))
+$Panel1.Name = [System.String]'Panel1'
+$Panel1.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]514,[System.Int32]439))
+$Panel1.TabIndex = [System.Int32]10
+#
 #Form1
 #
 $Form1.ClientSize = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]538,[System.Int32]573))
-$Form1.Controls.Add($TextBox4)
-$Form1.Controls.Add($Label5)
-$Form1.Controls.Add($TextBox3)
-$Form1.Controls.Add($Label4)
-$Form1.Controls.Add($TextBox2)
-$Form1.Controls.Add($Label3)
-$Form1.Controls.Add($TextBox1)
-$Form1.Controls.Add($Label2)
+$Form1.Controls.Add($Panel1)
 $Form1.Controls.Add($PictureBox1)
 $Form1.Controls.Add($Label1)
 $Form1.Cursor = [System.Windows.Forms.Cursors]::Cross
 $Form1.Icon = ([System.Drawing.Icon]$resources.'$this.Icon')
 $Form1.Text = [System.String]'TGF Scrcpy Client'
 ([System.ComponentModel.ISupportInitialize]$PictureBox1).EndInit()
+$Panel1.ResumeLayout($false)
+$Panel1.PerformLayout()
 $Form1.ResumeLayout($false)
-$Form1.PerformLayout()
 Add-Member -InputObject $Form1 -Name base -Value $base -MemberType NoteProperty
 Add-Member -InputObject $Form1 -Name Label1 -Value $Label1 -MemberType NoteProperty
 Add-Member -InputObject $Form1 -Name PictureBox1 -Value $PictureBox1 -MemberType NoteProperty
@@ -144,5 +157,6 @@ Add-Member -InputObject $Form1 -Name Label4 -Value $Label4 -MemberType NotePrope
 Add-Member -InputObject $Form1 -Name TextBox3 -Value $TextBox3 -MemberType NoteProperty
 Add-Member -InputObject $Form1 -Name Label5 -Value $Label5 -MemberType NoteProperty
 Add-Member -InputObject $Form1 -Name TextBox4 -Value $TextBox4 -MemberType NoteProperty
+Add-Member -InputObject $Form1 -Name Panel1 -Value $Panel1 -MemberType NoteProperty
 }
 . InitializeComponent
