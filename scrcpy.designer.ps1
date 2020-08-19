@@ -10,6 +10,16 @@ $Form1 = New-Object -TypeName System.Windows.Forms.Form
 [System.Windows.Forms.Label]$Label5 = $null
 [System.Windows.Forms.TextBox]$TextBox4 = $null
 [System.Windows.Forms.Panel]$Panel1 = $null
+[System.Windows.Forms.Panel]$Panel5 = $null
+[System.Windows.Forms.TextBox]$TextBox11 = $null
+[System.Windows.Forms.Label]$Label10 = $null
+[System.Windows.Forms.TextBox]$TextBox10 = $null
+[System.Windows.Forms.Label]$Label9 = $null
+[System.Windows.Forms.TextBox]$TextBox9 = $null
+[System.Windows.Forms.Label]$Label8 = $null
+[System.Windows.Forms.TextBox]$TextBox8 = $null
+[System.Windows.Forms.Label]$Label7 = $null
+[System.Windows.Forms.CheckBox]$CheckBox4 = $null
 [System.Windows.Forms.TextBox]$TextBox7 = $null
 [System.Windows.Forms.Label]$Label6 = $null
 [System.Windows.Forms.Panel]$Panel4 = $null
@@ -52,11 +62,22 @@ $TextBox6 = (New-Object -TypeName System.Windows.Forms.TextBox)
 $CheckBox3 = (New-Object -TypeName System.Windows.Forms.CheckBox)
 $Label6 = (New-Object -TypeName System.Windows.Forms.Label)
 $TextBox7 = (New-Object -TypeName System.Windows.Forms.TextBox)
+$Panel5 = (New-Object -TypeName System.Windows.Forms.Panel)
+$CheckBox4 = (New-Object -TypeName System.Windows.Forms.CheckBox)
+$Label7 = (New-Object -TypeName System.Windows.Forms.Label)
+$TextBox8 = (New-Object -TypeName System.Windows.Forms.TextBox)
+$Label8 = (New-Object -TypeName System.Windows.Forms.Label)
+$TextBox9 = (New-Object -TypeName System.Windows.Forms.TextBox)
+$Label9 = (New-Object -TypeName System.Windows.Forms.Label)
+$TextBox10 = (New-Object -TypeName System.Windows.Forms.TextBox)
+$Label10 = (New-Object -TypeName System.Windows.Forms.Label)
+$TextBox11 = (New-Object -TypeName System.Windows.Forms.TextBox)
 ([System.ComponentModel.ISupportInitialize]$PictureBox1).BeginInit()
 $Panel1.SuspendLayout()
 $Panel2.SuspendLayout()
 $Panel3.SuspendLayout()
 $Panel4.SuspendLayout()
+$Panel5.SuspendLayout()
 $Form1.SuspendLayout()
 #
 #Label1
@@ -151,6 +172,7 @@ $TextBox4.Text = [System.String]'15'
 #Panel1
 #
 $Panel1.AutoScroll = $true
+$Panel1.Controls.Add($Panel5)
 $Panel1.Controls.Add($TextBox7)
 $Panel1.Controls.Add($Label6)
 $Panel1.Controls.Add($Panel4)
@@ -166,7 +188,7 @@ $Panel1.Controls.Add($TextBox2)
 $Panel1.Controls.Add($Label4)
 $Panel1.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]12,[System.Int32]114))
 $Panel1.Name = [System.String]'Panel1'
-$Panel1.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]514,[System.Int32]439))
+$Panel1.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]514,[System.Int32]447))
 $Panel1.TabIndex = [System.Int32]10
 #
 #CheckBox1
@@ -311,6 +333,105 @@ $TextBox7.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([Syst
 $TextBox7.TabIndex = [System.Int32]15
 $TextBox7.Text = [System.String]'My Device'
 #
+#Panel5
+#
+$Panel5.BorderStyle = [System.Windows.Forms.BorderStyle]::FixedSingle
+$Panel5.Controls.Add($TextBox11)
+$Panel5.Controls.Add($Label10)
+$Panel5.Controls.Add($TextBox10)
+$Panel5.Controls.Add($Label9)
+$Panel5.Controls.Add($TextBox9)
+$Panel5.Controls.Add($Label8)
+$Panel5.Controls.Add($TextBox8)
+$Panel5.Controls.Add($Label7)
+$Panel5.Controls.Add($CheckBox4)
+$Panel5.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]275))
+$Panel5.Name = [System.String]'Panel5'
+$Panel5.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]186,[System.Int32]248))
+$Panel5.TabIndex = [System.Int32]16
+#
+#CheckBox4
+#
+$CheckBox4.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]3))
+$CheckBox4.Name = [System.String]'CheckBox4'
+$CheckBox4.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]166,[System.Int32]24))
+$CheckBox4.TabIndex = [System.Int32]0
+$CheckBox4.Text = [System.String]'Position and Size'
+$CheckBox4.UseCompatibleTextRendering = $true
+$CheckBox4.UseVisualStyleBackColor = $true
+#
+#Label7
+#
+$Label7.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]30))
+$Label7.Name = [System.String]'Label7'
+$Label7.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]100,[System.Int32]23))
+$Label7.TabIndex = [System.Int32]1
+$Label7.Text = [System.String]'window-x'
+$Label7.UseCompatibleTextRendering = $true
+#
+#TextBox8
+#
+$TextBox8.Enabled = $false
+$TextBox8.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]56))
+$TextBox8.Name = [System.String]'TextBox8'
+$TextBox8.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]166,[System.Int32]24))
+$TextBox8.TabIndex = [System.Int32]2
+$TextBox8.Text = [System.String]'100'
+#
+#Label8
+#
+$Label8.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]83))
+$Label8.Name = [System.String]'Label8'
+$Label8.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]100,[System.Int32]23))
+$Label8.TabIndex = [System.Int32]3
+$Label8.Text = [System.String]'window-y'
+$Label8.UseCompatibleTextRendering = $true
+#
+#TextBox9
+#
+$TextBox9.Enabled = $false
+$TextBox9.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]109))
+$TextBox9.Name = [System.String]'TextBox9'
+$TextBox9.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]166,[System.Int32]24))
+$TextBox9.TabIndex = [System.Int32]4
+$TextBox9.Text = [System.String]'100'
+#
+#Label9
+#
+$Label9.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]136))
+$Label9.Name = [System.String]'Label9'
+$Label9.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]100,[System.Int32]23))
+$Label9.TabIndex = [System.Int32]5
+$Label9.Text = [System.String]'window-width'
+$Label9.UseCompatibleTextRendering = $true
+#
+#TextBox10
+#
+$TextBox10.Enabled = $false
+$TextBox10.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]162))
+$TextBox10.Name = [System.String]'TextBox10'
+$TextBox10.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]169,[System.Int32]24))
+$TextBox10.TabIndex = [System.Int32]6
+$TextBox10.Text = [System.String]'800'
+#
+#Label10
+#
+$Label10.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]189))
+$Label10.Name = [System.String]'Label10'
+$Label10.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]100,[System.Int32]23))
+$Label10.TabIndex = [System.Int32]7
+$Label10.Text = [System.String]'window-height'
+$Label10.UseCompatibleTextRendering = $true
+#
+#TextBox11
+#
+$TextBox11.Enabled = $false
+$TextBox11.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]215))
+$TextBox11.Name = [System.String]'TextBox11'
+$TextBox11.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]166,[System.Int32]24))
+$TextBox11.TabIndex = [System.Int32]8
+$TextBox11.Text = [System.String]'600'
+#
 #Form1
 #
 $Form1.ClientSize = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]538,[System.Int32]573))
@@ -318,7 +439,10 @@ $Form1.Controls.Add($Panel1)
 $Form1.Controls.Add($PictureBox1)
 $Form1.Controls.Add($Label1)
 $Form1.Cursor = [System.Windows.Forms.Cursors]::Cross
+$Form1.FormBorderStyle = [System.Windows.Forms.FormBorderStyle]::Fixed3D
 $Form1.Icon = ([System.Drawing.Icon]$resources.'$this.Icon')
+$Form1.ImeMode = [System.Windows.Forms.ImeMode]::NoControl
+$Form1.KeyPreview = $true
 $Form1.Text = [System.String]'TGF Scrcpy Client'
 ([System.ComponentModel.ISupportInitialize]$PictureBox1).EndInit()
 $Panel1.ResumeLayout($false)
@@ -328,6 +452,8 @@ $Panel2.PerformLayout()
 $Panel3.ResumeLayout($false)
 $Panel4.ResumeLayout($false)
 $Panel4.PerformLayout()
+$Panel5.ResumeLayout($false)
+$Panel5.PerformLayout()
 $Form1.ResumeLayout($false)
 Add-Member -InputObject $Form1 -Name base -Value $base -MemberType NoteProperty
 Add-Member -InputObject $Form1 -Name Label1 -Value $Label1 -MemberType NoteProperty
@@ -341,6 +467,16 @@ Add-Member -InputObject $Form1 -Name TextBox3 -Value $TextBox3 -MemberType NoteP
 Add-Member -InputObject $Form1 -Name Label5 -Value $Label5 -MemberType NoteProperty
 Add-Member -InputObject $Form1 -Name TextBox4 -Value $TextBox4 -MemberType NoteProperty
 Add-Member -InputObject $Form1 -Name Panel1 -Value $Panel1 -MemberType NoteProperty
+Add-Member -InputObject $Form1 -Name Panel5 -Value $Panel5 -MemberType NoteProperty
+Add-Member -InputObject $Form1 -Name TextBox11 -Value $TextBox11 -MemberType NoteProperty
+Add-Member -InputObject $Form1 -Name Label10 -Value $Label10 -MemberType NoteProperty
+Add-Member -InputObject $Form1 -Name TextBox10 -Value $TextBox10 -MemberType NoteProperty
+Add-Member -InputObject $Form1 -Name Label9 -Value $Label9 -MemberType NoteProperty
+Add-Member -InputObject $Form1 -Name TextBox9 -Value $TextBox9 -MemberType NoteProperty
+Add-Member -InputObject $Form1 -Name Label8 -Value $Label8 -MemberType NoteProperty
+Add-Member -InputObject $Form1 -Name TextBox8 -Value $TextBox8 -MemberType NoteProperty
+Add-Member -InputObject $Form1 -Name Label7 -Value $Label7 -MemberType NoteProperty
+Add-Member -InputObject $Form1 -Name CheckBox4 -Value $CheckBox4 -MemberType NoteProperty
 Add-Member -InputObject $Form1 -Name TextBox7 -Value $TextBox7 -MemberType NoteProperty
 Add-Member -InputObject $Form1 -Name Label6 -Value $Label6 -MemberType NoteProperty
 Add-Member -InputObject $Form1 -Name Panel4 -Value $Panel4 -MemberType NoteProperty
