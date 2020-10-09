@@ -440,6 +440,7 @@ $Form1.Controls.Add($PictureBoxLogo)
 $Form1.Controls.Add($Label1)
 $Form1.Cursor = [System.Windows.Forms.Cursors]::Cross
 $Form1.FormBorderStyle = [System.Windows.Forms.FormBorderStyle]::Fixed3D
+$Form1.Icon = ([System.Drawing.Icon]$resources.'$this.Icon')
 $Form1.KeyPreview = $true
 $Form1.Text = [System.String]'TGF Scrcpy Client'
 ([System.ComponentModel.ISupportInitialize]$PictureBoxLogo).EndInit()
