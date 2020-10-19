@@ -1,5 +1,5 @@
 #MinersWin 2020
-#08.10.2020
+#19.10.2020
 #https://miners.win
 #Tutorial: https://youtube.com/minerswin
 #YouTube: https://youtube.com/TheGeekFreaks
