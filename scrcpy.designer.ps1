@@ -11,6 +11,7 @@ $Form1 = New-Object -TypeName System.Windows.Forms.Form
 [System.Windows.Forms.TextBox]$TextBox4 = $null
 [System.Windows.Forms.Panel]$Panel1 = $null
 [System.Windows.Forms.Panel]$Panel5 = $null
+[System.Windows.Forms.Button]$ButtonPositionandSize = $null
 [System.Windows.Forms.TextBox]$TextBox11 = $null
 [System.Windows.Forms.Label]$Label10 = $null
 [System.Windows.Forms.TextBox]$TextBox10 = $null
@@ -19,7 +20,6 @@ $Form1 = New-Object -TypeName System.Windows.Forms.Form
 [System.Windows.Forms.Label]$Label8 = $null
 [System.Windows.Forms.TextBox]$TextBox8 = $null
 [System.Windows.Forms.Label]$Label7 = $null
-[System.Windows.Forms.CheckBox]$CheckBox4 = $null
 [System.Windows.Forms.TextBox]$TextBox7 = $null
 [System.Windows.Forms.Label]$Label6 = $null
 [System.Windows.Forms.Panel]$Panel4 = $null
@@ -32,8 +32,8 @@ $Form1 = New-Object -TypeName System.Windows.Forms.Form
 [System.Windows.Forms.RadioButton]$RadioButton2 = $null
 [System.Windows.Forms.RadioButton]$RadioButton1 = $null
 [System.Windows.Forms.Panel]$Panel2 = $null
+[System.Windows.Forms.Button]$ButtonCropScreen = $null
 [System.Windows.Forms.TextBox]$TextBox5 = $null
-[System.Windows.Forms.CheckBox]$CheckBox1 = $null
 function InitializeComponent
 {
 $resources = . (Join-Path $PSScriptRoot 'scrcpy.resources.ps1')
@@ -57,7 +57,6 @@ $TextBox9 = (New-Object -TypeName System.Windows.Forms.TextBox)
 $Label8 = (New-Object -TypeName System.Windows.Forms.Label)
 $TextBox8 = (New-Object -TypeName System.Windows.Forms.TextBox)
 $Label7 = (New-Object -TypeName System.Windows.Forms.Label)
-$CheckBox4 = (New-Object -TypeName System.Windows.Forms.CheckBox)
 $TextBox7 = (New-Object -TypeName System.Windows.Forms.TextBox)
 $Label6 = (New-Object -TypeName System.Windows.Forms.Label)
 $Panel4 = (New-Object -TypeName System.Windows.Forms.Panel)
@@ -71,7 +70,8 @@ $RadioButton2 = (New-Object -TypeName System.Windows.Forms.RadioButton)
 $RadioButton1 = (New-Object -TypeName System.Windows.Forms.RadioButton)
 $Panel2 = (New-Object -TypeName System.Windows.Forms.Panel)
 $TextBox5 = (New-Object -TypeName System.Windows.Forms.TextBox)
-$CheckBox1 = (New-Object -TypeName System.Windows.Forms.CheckBox)
+$ButtonPositionandSize = (New-Object -TypeName System.Windows.Forms.Button)
+$ButtonCropScreen = (New-Object -TypeName System.Windows.Forms.Button)
 ([System.ComponentModel.ISupportInitialize]$PictureBoxLogo).BeginInit()
 $Panel1.SuspendLayout()
 $Panel5.SuspendLayout()
@@ -114,7 +114,7 @@ $Label2.add_Click($Label2_Click)
 #
 $TextBox1.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]33))
 $TextBox1.Name = [System.String]'TextBox1'
-$TextBox1.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]173,[System.Int32]21))
+$TextBox1.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]173,[System.Int32]24))
 $TextBox1.TabIndex = [System.Int32]3
 $TextBox1.Text = [System.String]'127.0.0.1'
 #
@@ -131,7 +131,7 @@ $Label3.UseCompatibleTextRendering = $true
 #
 $TextBox2.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]86))
 $TextBox2.Name = [System.String]'TextBox2'
-$TextBox2.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]173,[System.Int32]21))
+$TextBox2.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]173,[System.Int32]24))
 $TextBox2.TabIndex = [System.Int32]5
 $TextBox2.Text = [System.String]'1080'
 #
@@ -148,7 +148,7 @@ $Label4.UseCompatibleTextRendering = $true
 #
 $TextBox3.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]139))
 $TextBox3.Name = [System.String]'TextBox3'
-$TextBox3.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]173,[System.Int32]21))
+$TextBox3.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]173,[System.Int32]24))
 $TextBox3.TabIndex = [System.Int32]7
 $TextBox3.Text = [System.String]'2M'
 #
@@ -165,7 +165,7 @@ $Label5.UseCompatibleTextRendering = $true
 #
 $TextBox4.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]192))
 $TextBox4.Name = [System.String]'TextBox4'
-$TextBox4.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]173,[System.Int32]21))
+$TextBox4.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]173,[System.Int32]24))
 $TextBox4.TabIndex = [System.Int32]9
 $TextBox4.Text = [System.String]'15'
 #
@@ -194,6 +194,7 @@ $Panel1.TabIndex = [System.Int32]10
 #Panel5
 #
 $Panel5.BorderStyle = [System.Windows.Forms.BorderStyle]::FixedSingle
+$Panel5.Controls.Add($ButtonPositionandSize)
 $Panel5.Controls.Add($TextBox11)
 $Panel5.Controls.Add($Label10)
 $Panel5.Controls.Add($TextBox10)
@@ -202,7 +203,6 @@ $Panel5.Controls.Add($TextBox9)
 $Panel5.Controls.Add($Label8)
 $Panel5.Controls.Add($TextBox8)
 $Panel5.Controls.Add($Label7)
-$Panel5.Controls.Add($CheckBox4)
 $Panel5.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]275))
 $Panel5.Name = [System.String]'Panel5'
 $Panel5.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]186,[System.Int32]248))
@@ -213,7 +213,7 @@ $Panel5.TabIndex = [System.Int32]16
 $TextBox11.Enabled = $false
 $TextBox11.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]215))
 $TextBox11.Name = [System.String]'TextBox11'
-$TextBox11.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]166,[System.Int32]21))
+$TextBox11.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]166,[System.Int32]24))
 $TextBox11.TabIndex = [System.Int32]8
 $TextBox11.Text = [System.String]'600'
 #
@@ -231,7 +231,7 @@ $Label10.UseCompatibleTextRendering = $true
 $TextBox10.Enabled = $false
 $TextBox10.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]162))
 $TextBox10.Name = [System.String]'TextBox10'
-$TextBox10.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]169,[System.Int32]21))
+$TextBox10.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]169,[System.Int32]24))
 $TextBox10.TabIndex = [System.Int32]6
 $TextBox10.Text = [System.String]'800'
 #
@@ -249,7 +249,7 @@ $Label9.UseCompatibleTextRendering = $true
 $TextBox9.Enabled = $false
 $TextBox9.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]109))
 $TextBox9.Name = [System.String]'TextBox9'
-$TextBox9.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]166,[System.Int32]21))
+$TextBox9.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]166,[System.Int32]24))
 $TextBox9.TabIndex = [System.Int32]4
 $TextBox9.Text = [System.String]'100'
 #
@@ -267,7 +267,7 @@ $Label8.UseCompatibleTextRendering = $true
 $TextBox8.Enabled = $false
 $TextBox8.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]56))
 $TextBox8.Name = [System.String]'TextBox8'
-$TextBox8.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]166,[System.Int32]21))
+$TextBox8.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]166,[System.Int32]24))
 $TextBox8.TabIndex = [System.Int32]2
 $TextBox8.Text = [System.String]'100'
 #
@@ -280,21 +280,11 @@ $Label7.TabIndex = [System.Int32]1
 $Label7.Text = [System.String]'window-x'
 $Label7.UseCompatibleTextRendering = $true
 #
-#CheckBox4
-#
-$CheckBox4.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]3))
-$CheckBox4.Name = [System.String]'CheckBox4'
-$CheckBox4.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]166,[System.Int32]24))
-$CheckBox4.TabIndex = [System.Int32]0
-$CheckBox4.Text = [System.String]'Position and Size'
-$CheckBox4.UseCompatibleTextRendering = $true
-$CheckBox4.UseVisualStyleBackColor = $true
-#
 #TextBox7
 #
 $TextBox7.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]245))
 $TextBox7.Name = [System.String]'TextBox7'
-$TextBox7.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]173,[System.Int32]21))
+$TextBox7.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]173,[System.Int32]24))
 $TextBox7.TabIndex = [System.Int32]15
 $TextBox7.Text = [System.String]'My Device'
 #
@@ -333,7 +323,7 @@ $CheckBox3.UseVisualStyleBackColor = $true
 $TextBox6.Enabled = $false
 $TextBox6.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]33))
 $TextBox6.Name = [System.String]'TextBox6'
-$TextBox6.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]192,[System.Int32]21))
+$TextBox6.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]192,[System.Int32]24))
 $TextBox6.TabIndex = [System.Int32]1
 $TextBox6.Text = [System.String]'file.mp4'
 #
@@ -406,8 +396,8 @@ $RadioButton1.UseVisualStyleBackColor = $true
 #Panel2
 #
 $Panel2.BorderStyle = [System.Windows.Forms.BorderStyle]::FixedSingle
+$Panel2.Controls.Add($ButtonCropScreen)
 $Panel2.Controls.Add($TextBox5)
-$Panel2.Controls.Add($CheckBox1)
 $Panel2.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]195,[System.Int32]10))
 $Panel2.Name = [System.String]'Panel2'
 $Panel2.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]200,[System.Int32]73))
@@ -418,19 +408,29 @@ $Panel2.TabIndex = [System.Int32]11
 $TextBox5.Enabled = $false
 $TextBox5.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]-1,[System.Int32]33))
 $TextBox5.Name = [System.String]'TextBox5'
-$TextBox5.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]196,[System.Int32]21))
+$TextBox5.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]196,[System.Int32]24))
 $TextBox5.TabIndex = [System.Int32]11
 $TextBox5.Text = [System.String]'1224:1440:0:0'
 #
-#CheckBox1
+#ButtonPositionandSize
 #
-$CheckBox1.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]3))
-$CheckBox1.Name = [System.String]'CheckBox1'
-$CheckBox1.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]104,[System.Int32]24))
-$CheckBox1.TabIndex = [System.Int32]10
-$CheckBox1.Text = [System.String]'Crop Screen'
-$CheckBox1.UseCompatibleTextRendering = $true
-$CheckBox1.UseVisualStyleBackColor = $true
+$ButtonPositionandSize.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]-1,[System.Int32]4))
+$ButtonPositionandSize.Name = [System.String]'ButtonPositionandSize'
+$ButtonPositionandSize.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]186,[System.Int32]23))
+$ButtonPositionandSize.TabIndex = [System.Int32]9
+$ButtonPositionandSize.Text = [System.String]'Position and Size'
+$ButtonPositionandSize.UseCompatibleTextRendering = $true
+$ButtonPositionandSize.UseVisualStyleBackColor = $true
+#
+#ButtonCropScreen
+#
+$ButtonCropScreen.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]-1,[System.Int32]4))
+$ButtonCropScreen.Name = [System.String]'ButtonCropScreen'
+$ButtonCropScreen.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]200,[System.Int32]23))
+$ButtonCropScreen.TabIndex = [System.Int32]12
+$ButtonCropScreen.Text = [System.String]'Crop Screen'
+$ButtonCropScreen.UseCompatibleTextRendering = $true
+$ButtonCropScreen.UseVisualStyleBackColor = $true
 #
 #Form1
 #
@@ -467,6 +467,7 @@ Add-Member -InputObject $Form1 -Name Label5 -Value $Label5 -MemberType NotePrope
 Add-Member -InputObject $Form1 -Name TextBox4 -Value $TextBox4 -MemberType NoteProperty
 Add-Member -InputObject $Form1 -Name Panel1 -Value $Panel1 -MemberType NoteProperty
 Add-Member -InputObject $Form1 -Name Panel5 -Value $Panel5 -MemberType NoteProperty
+Add-Member -InputObject $Form1 -Name ButtonPositionandSize -Value $ButtonPositionandSize -MemberType NoteProperty
 Add-Member -InputObject $Form1 -Name TextBox11 -Value $TextBox11 -MemberType NoteProperty
 Add-Member -InputObject $Form1 -Name Label10 -Value $Label10 -MemberType NoteProperty
 Add-Member -InputObject $Form1 -Name TextBox10 -Value $TextBox10 -MemberType NoteProperty
@@ -475,7 +476,6 @@ Add-Member -InputObject $Form1 -Name TextBox9 -Value $TextBox9 -MemberType NoteP
 Add-Member -InputObject $Form1 -Name Label8 -Value $Label8 -MemberType NoteProperty
 Add-Member -InputObject $Form1 -Name TextBox8 -Value $TextBox8 -MemberType NoteProperty
 Add-Member -InputObject $Form1 -Name Label7 -Value $Label7 -MemberType NoteProperty
-Add-Member -InputObject $Form1 -Name CheckBox4 -Value $CheckBox4 -MemberType NoteProperty
 Add-Member -InputObject $Form1 -Name TextBox7 -Value $TextBox7 -MemberType NoteProperty
 Add-Member -InputObject $Form1 -Name Label6 -Value $Label6 -MemberType NoteProperty
 Add-Member -InputObject $Form1 -Name Panel4 -Value $Panel4 -MemberType NoteProperty
@@ -488,7 +488,7 @@ Add-Member -InputObject $Form1 -Name RadioButton3 -Value $RadioButton3 -MemberTy
 Add-Member -InputObject $Form1 -Name RadioButton2 -Value $RadioButton2 -MemberType NoteProperty
 Add-Member -InputObject $Form1 -Name RadioButton1 -Value $RadioButton1 -MemberType NoteProperty
 Add-Member -InputObject $Form1 -Name Panel2 -Value $Panel2 -MemberType NoteProperty
+Add-Member -InputObject $Form1 -Name ButtonCropScreen -Value $ButtonCropScreen -MemberType NoteProperty
 Add-Member -InputObject $Form1 -Name TextBox5 -Value $TextBox5 -MemberType NoteProperty
-Add-Member -InputObject $Form1 -Name CheckBox1 -Value $CheckBox1 -MemberType NoteProperty
 }
 . InitializeComponent
