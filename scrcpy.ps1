@@ -36,17 +36,29 @@ $ButtonPositionandSize.Add_Click{
     }
 }
 
+#Settings auslesen
+$IP = $TextBoxIP.Text
+$MaxSize = $ComboBoxMaxSize.Text
+$Bitrate = $ComboBoxBitrate.SelectedItem
+$FPS = $ComboBoxMaxFPS.SelectedItem
+$WindowTitle = $TextBoxWindowTitle.SelectedItem
+
+if ($TextBoxCropScreen.Enabled){
+    $CropScreen = $TextBoxCropScreen.Text
+}else{$CropScreen =$false}
+
+if ($RadioButtonNaturalOrientation.Checked){[int]$Orientation=0}elseif($RadioButton90CounterClockwise.Checked){[int]$Orientation=1}elseif($RadioButton180Degree.Checked){[int]$Orientation=2}else{[int]$Orientation=3}
 
 
-
-
-
-
-
-
-
-
-
+Write-Host "Debug:
+IP: $($IP)
+MaxSize: $($MaxSize)
+Bitrate: $($Bitrate)
+FPS: $($FPS)
+WindowTitle: $($WindowTitle)
+CropScreen: $($CropScreen)
+Orientation: $($Orientation)
+"
 
 #Call Form
 $FormScrcpy.ShowDialog()
