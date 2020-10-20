@@ -402,7 +402,7 @@ $RadioButtonNaturalOrientation.Name = [System.String]'RadioButtonNaturalOrientat
 $RadioButtonNaturalOrientation.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]192,[System.Int32]24))
 $RadioButtonNaturalOrientation.TabIndex = [System.Int32]0
 $RadioButtonNaturalOrientation.TabStop = $true
-$RadioButtonNaturalOrientation.Text = [System.String]'natureal Orientation'
+$RadioButtonNaturalOrientation.Text = [System.String]'natural Orientation'
 $RadioButtonNaturalOrientation.UseCompatibleTextRendering = $true
 $RadioButtonNaturalOrientation.UseVisualStyleBackColor = $true
 #
