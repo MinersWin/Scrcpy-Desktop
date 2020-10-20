@@ -4,12 +4,12 @@ $FormScrcpy = New-Object -TypeName System.Windows.Forms.Form
 [System.Windows.Forms.Label]$LabelIP = $null
 [System.Windows.Forms.TextBox]$TextBoxIP = $null
 [System.Windows.Forms.Label]$LabelMaxSize = $null
-[System.Windows.Forms.TextBox]$TextBoxMaxSize = $null
 [System.Windows.Forms.Label]$LabelBitrate = $null
 [System.Windows.Forms.TextBox]$TextBoxBitrate = $null
 [System.Windows.Forms.Label]$LabelMaxFPS = $null
 [System.Windows.Forms.Panel]$PanelMain = $null
 [System.Windows.Forms.Panel]$PanelSettings = $null
+[System.Windows.Forms.ComboBox]$ComboBoxMaxSize = $null
 [System.Windows.Forms.ComboBox]$ComboBoxMaxFPS = $null
 [System.Windows.Forms.TextBox]$TextBoxWindowTitle = $null
 [System.Windows.Forms.Label]$LabelWindowTitle = $null
@@ -43,7 +43,6 @@ $PictureBoxLogo = (New-Object -TypeName System.Windows.Forms.PictureBox)
 $LabelIP = (New-Object -TypeName System.Windows.Forms.Label)
 $TextBoxIP = (New-Object -TypeName System.Windows.Forms.TextBox)
 $LabelMaxSize = (New-Object -TypeName System.Windows.Forms.Label)
-$TextBoxMaxSize = (New-Object -TypeName System.Windows.Forms.TextBox)
 $LabelBitrate = (New-Object -TypeName System.Windows.Forms.Label)
 $TextBoxBitrate = (New-Object -TypeName System.Windows.Forms.TextBox)
 $LabelMaxFPS = (New-Object -TypeName System.Windows.Forms.Label)
@@ -74,6 +73,7 @@ $RadioButtonNaturalOrientation = (New-Object -TypeName System.Windows.Forms.Radi
 $PanelCropScreen = (New-Object -TypeName System.Windows.Forms.Panel)
 $ButtonCropScreen = (New-Object -TypeName System.Windows.Forms.Button)
 $TextBoxCropScreen = (New-Object -TypeName System.Windows.Forms.TextBox)
+$ComboBoxMaxSize = (New-Object -TypeName System.Windows.Forms.ComboBox)
 ([System.ComponentModel.ISupportInitialize]$PictureBoxLogo).BeginInit()
 $PanelMain.SuspendLayout()
 $PanelSettings.SuspendLayout()
@@ -130,14 +130,6 @@ $LabelMaxSize.TabIndex = [System.Int32]4
 $LabelMaxSize.Text = [System.String]'Max Size:'
 $LabelMaxSize.UseCompatibleTextRendering = $true
 #
-#TextBoxMaxSize
-#
-$TextBoxMaxSize.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]4,[System.Int32]86))
-$TextBoxMaxSize.Name = [System.String]'TextBoxMaxSize'
-$TextBoxMaxSize.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]173,[System.Int32]24))
-$TextBoxMaxSize.TabIndex = [System.Int32]5
-$TextBoxMaxSize.Text = [System.String]'1080'
-#
 #LabelBitrate
 #
 $LabelBitrate.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]4,[System.Int32]113))
@@ -182,11 +174,11 @@ $PanelMain.add_Paint($Panel1_Paint)
 #PanelSettings
 #
 $PanelSettings.BorderStyle = [System.Windows.Forms.BorderStyle]::FixedSingle
+$PanelSettings.Controls.Add($ComboBoxMaxSize)
 $PanelSettings.Controls.Add($ComboBoxMaxFPS)
 $PanelSettings.Controls.Add($LabelIP)
 $PanelSettings.Controls.Add($LabelBitrate)
 $PanelSettings.Controls.Add($TextBoxWindowTitle)
-$PanelSettings.Controls.Add($TextBoxMaxSize)
 $PanelSettings.Controls.Add($LabelWindowTitle)
 $PanelSettings.Controls.Add($TextBoxBitrate)
 $PanelSettings.Controls.Add($LabelMaxSize)
@@ -452,6 +444,19 @@ $TextBoxCropScreen.Size = (New-Object -TypeName System.Drawing.Size -ArgumentLis
 $TextBoxCropScreen.TabIndex = [System.Int32]11
 $TextBoxCropScreen.Text = [System.String]'1224:1440:0:0'
 #
+#ComboBoxMaxSize
+#
+$ComboBoxMaxSize.AutoCompleteCustomSource.AddRange([System.String[]]@([System.String]'480',[System.String]'640',[System.String]'720',[System.String]'800',[System.String]'768',[System.String]'960',[System.String]'1024',[System.String]'1200',[System.String]'1280',[System.String]'1440',[System.String]'1600',[System.String]'1920',[System.String]'2160',[System.String]'2880',[System.String]'2840',[System.String]'4096',[System.String]'5120'))
+$ComboBoxMaxSize.AutoCompleteMode = [System.Windows.Forms.AutoCompleteMode]::SuggestAppend
+$ComboBoxMaxSize.AutoCompleteSource = [System.Windows.Forms.AutoCompleteSource]::CustomSource
+$ComboBoxMaxSize.FormattingEnabled = $true
+$ComboBoxMaxSize.Items.AddRange([System.Object[]]@([System.String]'480',[System.String]'640',[System.String]'720',[System.String]'800',[System.String]'768',[System.String]'960',[System.String]'1024',[System.String]'1200',[System.String]'1280',[System.String]'1440',[System.String]'1600',[System.String]'1920',[System.String]'2160',[System.String]'2880',[System.String]'2840',[System.String]'4096',[System.String]'5120'))
+$ComboBoxMaxSize.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]86))
+$ComboBoxMaxSize.Name = [System.String]'ComboBoxMaxSize'
+$ComboBoxMaxSize.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]174,[System.Int32]25))
+$ComboBoxMaxSize.TabIndex = [System.Int32]17
+$ComboBoxMaxSize.Text = [System.String]'1024'
+#
 #FormScrcpy
 #
 $FormScrcpy.ClientSize = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]610,[System.Int32]450))
@@ -481,12 +486,12 @@ Add-Member -InputObject $FormScrcpy -Name PictureBoxLogo -Value $PictureBoxLogo 
 Add-Member -InputObject $FormScrcpy -Name LabelIP -Value $LabelIP -MemberType NoteProperty
 Add-Member -InputObject $FormScrcpy -Name TextBoxIP -Value $TextBoxIP -MemberType NoteProperty
 Add-Member -InputObject $FormScrcpy -Name LabelMaxSize -Value $LabelMaxSize -MemberType NoteProperty
-Add-Member -InputObject $FormScrcpy -Name TextBoxMaxSize -Value $TextBoxMaxSize -MemberType NoteProperty
 Add-Member -InputObject $FormScrcpy -Name LabelBitrate -Value $LabelBitrate -MemberType NoteProperty
 Add-Member -InputObject $FormScrcpy -Name TextBoxBitrate -Value $TextBoxBitrate -MemberType NoteProperty
 Add-Member -InputObject $FormScrcpy -Name LabelMaxFPS -Value $LabelMaxFPS -MemberType NoteProperty
 Add-Member -InputObject $FormScrcpy -Name PanelMain -Value $PanelMain -MemberType NoteProperty
 Add-Member -InputObject $FormScrcpy -Name PanelSettings -Value $PanelSettings -MemberType NoteProperty
+Add-Member -InputObject $FormScrcpy -Name ComboBoxMaxSize -Value $ComboBoxMaxSize -MemberType NoteProperty
 Add-Member -InputObject $FormScrcpy -Name ComboBoxMaxFPS -Value $ComboBoxMaxFPS -MemberType NoteProperty
 Add-Member -InputObject $FormScrcpy -Name TextBoxWindowTitle -Value $TextBoxWindowTitle -MemberType NoteProperty
 Add-Member -InputObject $FormScrcpy -Name LabelWindowTitle -Value $LabelWindowTitle -MemberType NoteProperty
