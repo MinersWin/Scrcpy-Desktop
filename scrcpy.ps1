@@ -35,21 +35,39 @@ $ButtonPositionandSize.Add_Click{
         $TextBoxWindowWidth.Enabled = $true
     }
 }
-
+##################
 #Settings auslesen
+##################
+#IP
 $IP = $TextBoxIP.Text
+#Max Size
 $MaxSize = $ComboBoxMaxSize.Text
+#Bitrate
 $Bitrate = $ComboBoxBitrate.SelectedItem
+#FPS
 $FPS = $ComboBoxMaxFPS.SelectedItem
+#WindowTitle
 $WindowTitle = $TextBoxWindowTitle.SelectedItem
-
+#CropScreen
 if ($TextBoxCropScreen.Enabled){
     $CropScreen = $TextBoxCropScreen.Text
 }else{$CropScreen =$false}
-
+#Orientation
 if ($RadioButtonNaturalOrientation.Checked){[int]$Orientation=0}elseif($RadioButton90CounterClockwise.Checked){[int]$Orientation=1}elseif($RadioButton180Degree.Checked){[int]$Orientation=2}else{[int]$Orientation=3}
+#record
+[bool]$Recording = $CheckBoxRecord.Checked
+#Display
+[bool]$Display = $CheckBoxNoDisplay.Checked
+#Filepath for Recording
+$Filepath = $TextBoxRecordFile.Text
+#Position
+$WindowX = $TextBoxWindowX.Text
+$WindowY = $TextBoxWindowY.Text
+#Size
+$WindowWidth = $TextBoxWindowWidth.Text
+$WindowHeight = $TextBoxWindowHeight.Text
 
-
+$PictureBoxLogo.Add_Click{
 Write-Host "Debug:
 IP: $($IP)
 MaxSize: $($MaxSize)
@@ -58,7 +76,15 @@ FPS: $($FPS)
 WindowTitle: $($WindowTitle)
 CropScreen: $($CropScreen)
 Orientation: $($Orientation)
+Recording: $($Recording)
+Show Display: $($Display)
+Filepath: $($Filepath)
+WindowX: $($WindowX)
+WindowY: $($WindowY)
+WindowWidth: $($WindowWidth)
+WindowHeight: $($WindowHeight)
 "
+}
 
 #Call Form
 $FormScrcpy.ShowDialog()
