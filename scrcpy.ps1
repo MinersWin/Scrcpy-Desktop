@@ -72,7 +72,7 @@ function Read-Settings{
 }
 
 $PictureBoxLogo.Add_Click{Debug}
-function Debug-Function{
+function Debug{
     Read-Settings
     Write-Host "`n`n`nDebug:`nIP: $($IP)`nMaxSize: $($MaxSize)`nBitrate: $($Bitrate)`nFPS: $($FPS)`nWindowTitle: $($WindowTitle)`nCropScreen: $($CropScreen)`nOrientation: $($Orientation)`nRecording: $($Recording)`nShow Display: $($Display)`nFilepath: $($Filepath)`nWindowX: $($WindowX)`nWindowY: $($WindowY)`nWindowWidth: $($WindowWidth)`nWindowHeight: $($WindowHeight)"
 }
@@ -115,7 +115,27 @@ function Download-Scrcpy{
     Write-Output "Downloadzeit: $((Get-Date).Subtract($start_time).Seconds) Sekunde(n)"
 }
 
+function Form_String{
+    [string]$ConsoleString=""
+    $ConsoleString += "--max-size $($MaxSize) --bit-rate $($Bitrate) --max-fps $($FPS) --rotation $($Orientation) --window-title $($WindowTitle)"
+    if ($TextBoxCropScreen.Enabled){
+        $ConsoleString += "--crop $CropScreen"
+    }
+    if ($Recording){
+        if ($Display){
+            $ConsoleString += "--no-display"
+        }
+        $ConsoleString += "--record $($Filepath)"
+    }
+    if ($IP -ne ""){
+        $ConsoleString += "--serial $($IP)"
+    }
+    if ($TextBoxWindowX.Enabled){
+        $ConsoleString += "--window-x $($WindowX) --window-y $($WindowY) --window-width $($WindowWidth) --window-height $($WindowHeight)"
+    }
+}
 
+$TextBoxIP.Add_Click{(Download-Scrcpy)}
 Debug-Function
 #Call Form
 $FormScrcpy.ShowDialog()
