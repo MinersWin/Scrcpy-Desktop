@@ -7,6 +7,8 @@ $FormScrcpy = New-Object -TypeName System.Windows.Forms.Form
 [System.Windows.Forms.Label]$LabelBitrate = $null
 [System.Windows.Forms.Label]$LabelMaxFPS = $null
 [System.Windows.Forms.Panel]$PanelMain = $null
+[System.Windows.Forms.Button]$ButtonConnect = $null
+[System.Windows.Forms.Button]$ButtonExit = $null
 [System.Windows.Forms.Panel]$PanelSettings = $null
 [System.Windows.Forms.ComboBox]$ComboBoxBitrate = $null
 [System.Windows.Forms.ComboBox]$ComboBoxMaxSize = $null
@@ -35,6 +37,7 @@ $FormScrcpy = New-Object -TypeName System.Windows.Forms.Form
 [System.Windows.Forms.Panel]$PanelCropScreen = $null
 [System.Windows.Forms.Button]$ButtonCropScreen = $null
 [System.Windows.Forms.TextBox]$TextBoxCropScreen = $null
+[System.Windows.Forms.Label]$Label1 = $null
 function InitializeComponent
 {
 $resources = . (Join-Path $PSScriptRoot 'scrcpy.resources.ps1')
@@ -47,6 +50,8 @@ $LabelBitrate = (New-Object -TypeName System.Windows.Forms.Label)
 $LabelMaxFPS = (New-Object -TypeName System.Windows.Forms.Label)
 $PanelMain = (New-Object -TypeName System.Windows.Forms.Panel)
 $PanelSettings = (New-Object -TypeName System.Windows.Forms.Panel)
+$ComboBoxBitrate = (New-Object -TypeName System.Windows.Forms.ComboBox)
+$ComboBoxMaxSize = (New-Object -TypeName System.Windows.Forms.ComboBox)
 $ComboBoxMaxFPS = (New-Object -TypeName System.Windows.Forms.ComboBox)
 $TextBoxWindowTitle = (New-Object -TypeName System.Windows.Forms.TextBox)
 $LabelWindowTitle = (New-Object -TypeName System.Windows.Forms.Label)
@@ -72,8 +77,9 @@ $RadioButtonNaturalOrientation = (New-Object -TypeName System.Windows.Forms.Radi
 $PanelCropScreen = (New-Object -TypeName System.Windows.Forms.Panel)
 $ButtonCropScreen = (New-Object -TypeName System.Windows.Forms.Button)
 $TextBoxCropScreen = (New-Object -TypeName System.Windows.Forms.TextBox)
-$ComboBoxMaxSize = (New-Object -TypeName System.Windows.Forms.ComboBox)
-$ComboBoxBitrate = (New-Object -TypeName System.Windows.Forms.ComboBox)
+$ButtonExit = (New-Object -TypeName System.Windows.Forms.Button)
+$ButtonConnect = (New-Object -TypeName System.Windows.Forms.Button)
+$Label1 = (New-Object -TypeName System.Windows.Forms.Label)
 ([System.ComponentModel.ISupportInitialize]$PictureBoxLogo).BeginInit()
 $PanelMain.SuspendLayout()
 $PanelSettings.SuspendLayout()
@@ -152,6 +158,8 @@ $LabelMaxFPS.UseCompatibleTextRendering = $true
 #
 $PanelMain.AutoScroll = $true
 $PanelMain.BorderStyle = [System.Windows.Forms.BorderStyle]::Fixed3D
+$PanelMain.Controls.Add($ButtonConnect)
+$PanelMain.Controls.Add($ButtonExit)
 $PanelMain.Controls.Add($PanelSettings)
 $PanelMain.Controls.Add($PanelPositionAndSize)
 $PanelMain.Controls.Add($PanelRecord)
@@ -180,6 +188,32 @@ $PanelSettings.Location = (New-Object -TypeName System.Drawing.Point -ArgumentLi
 $PanelSettings.Name = [System.String]'PanelSettings'
 $PanelSettings.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]186,[System.Int32]278))
 $PanelSettings.TabIndex = [System.Int32]17
+#
+#ComboBoxBitrate
+#
+$ComboBoxBitrate.AutoCompleteCustomSource.AddRange([System.String[]]@([System.String]'1M',[System.String]'1,5M',[System.String]'2M',[System.String]'2,5M',[System.String]'3M',[System.String]'5M',[System.String]'6M',[System.String]'7M',[System.String]'8M',[System.String]'9M',[System.String]'10M',[System.String]'11M',[System.String]'12M'))
+$ComboBoxBitrate.AutoCompleteMode = [System.Windows.Forms.AutoCompleteMode]::SuggestAppend
+$ComboBoxBitrate.AutoCompleteSource = [System.Windows.Forms.AutoCompleteSource]::CustomSource
+$ComboBoxBitrate.FormattingEnabled = $true
+$ComboBoxBitrate.Items.AddRange([System.Object[]]@([System.String]'1M',[System.String]'1,5M',[System.String]'2M',[System.String]'2,5M',[System.String]'3M',[System.String]'5M',[System.String]'6M',[System.String]'7M',[System.String]'8M',[System.String]'9M',[System.String]'10M',[System.String]'11M',[System.String]'12M'))
+$ComboBoxBitrate.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]4,[System.Int32]137))
+$ComboBoxBitrate.Name = [System.String]'ComboBoxBitrate'
+$ComboBoxBitrate.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]173,[System.Int32]25))
+$ComboBoxBitrate.TabIndex = [System.Int32]18
+$ComboBoxBitrate.Text = [System.String]'2M'
+#
+#ComboBoxMaxSize
+#
+$ComboBoxMaxSize.AutoCompleteCustomSource.AddRange([System.String[]]@([System.String]'480',[System.String]'640',[System.String]'720',[System.String]'800',[System.String]'768',[System.String]'960',[System.String]'1024',[System.String]'1200',[System.String]'1280',[System.String]'1440',[System.String]'1600',[System.String]'1920',[System.String]'2160',[System.String]'2880',[System.String]'2840',[System.String]'4096',[System.String]'5120'))
+$ComboBoxMaxSize.AutoCompleteMode = [System.Windows.Forms.AutoCompleteMode]::SuggestAppend
+$ComboBoxMaxSize.AutoCompleteSource = [System.Windows.Forms.AutoCompleteSource]::CustomSource
+$ComboBoxMaxSize.FormattingEnabled = $true
+$ComboBoxMaxSize.Items.AddRange([System.Object[]]@([System.String]'480',[System.String]'640',[System.String]'720',[System.String]'800',[System.String]'768',[System.String]'960',[System.String]'1024',[System.String]'1200',[System.String]'1280',[System.String]'1440',[System.String]'1600',[System.String]'1920',[System.String]'2160',[System.String]'2880',[System.String]'2840',[System.String]'4096',[System.String]'5120'))
+$ComboBoxMaxSize.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]86))
+$ComboBoxMaxSize.Name = [System.String]'ComboBoxMaxSize'
+$ComboBoxMaxSize.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]174,[System.Int32]25))
+$ComboBoxMaxSize.TabIndex = [System.Int32]17
+$ComboBoxMaxSize.Text = [System.String]'1024'
 #
 #ComboBoxMaxFPS
 #
@@ -436,35 +470,39 @@ $TextBoxCropScreen.Size = (New-Object -TypeName System.Drawing.Size -ArgumentLis
 $TextBoxCropScreen.TabIndex = [System.Int32]11
 $TextBoxCropScreen.Text = [System.String]'1224:1440:0:0'
 #
-#ComboBoxMaxSize
+#ButtonExit
 #
-$ComboBoxMaxSize.AutoCompleteCustomSource.AddRange([System.String[]]@([System.String]'480',[System.String]'640',[System.String]'720',[System.String]'800',[System.String]'768',[System.String]'960',[System.String]'1024',[System.String]'1200',[System.String]'1280',[System.String]'1440',[System.String]'1600',[System.String]'1920',[System.String]'2160',[System.String]'2880',[System.String]'2840',[System.String]'4096',[System.String]'5120'))
-$ComboBoxMaxSize.AutoCompleteMode = [System.Windows.Forms.AutoCompleteMode]::SuggestAppend
-$ComboBoxMaxSize.AutoCompleteSource = [System.Windows.Forms.AutoCompleteSource]::CustomSource
-$ComboBoxMaxSize.FormattingEnabled = $true
-$ComboBoxMaxSize.Items.AddRange([System.Object[]]@([System.String]'480',[System.String]'640',[System.String]'720',[System.String]'800',[System.String]'768',[System.String]'960',[System.String]'1024',[System.String]'1200',[System.String]'1280',[System.String]'1440',[System.String]'1600',[System.String]'1920',[System.String]'2160',[System.String]'2880',[System.String]'2840',[System.String]'4096',[System.String]'5120'))
-$ComboBoxMaxSize.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]86))
-$ComboBoxMaxSize.Name = [System.String]'ComboBoxMaxSize'
-$ComboBoxMaxSize.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]174,[System.Int32]25))
-$ComboBoxMaxSize.TabIndex = [System.Int32]17
-$ComboBoxMaxSize.Text = [System.String]'1024'
+$ButtonExit.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]509,[System.Int32]288))
+$ButtonExit.Name = [System.String]'ButtonExit'
+$ButtonExit.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]75,[System.Int32]23))
+$ButtonExit.TabIndex = [System.Int32]18
+$ButtonExit.Text = [System.String]'Exit'
+$ButtonExit.UseCompatibleTextRendering = $true
+$ButtonExit.UseVisualStyleBackColor = $true
 #
-#ComboBoxBitrate
+#ButtonConnect
 #
-$ComboBoxBitrate.AutoCompleteCustomSource.AddRange([System.String[]]@([System.String]'1M',[System.String]'1,5M',[System.String]'2M',[System.String]'2,5M',[System.String]'3M',[System.String]'5M',[System.String]'6M',[System.String]'7M',[System.String]'8M',[System.String]'9M',[System.String]'10M',[System.String]'11M',[System.String]'12M'))
-$ComboBoxBitrate.AutoCompleteMode = [System.Windows.Forms.AutoCompleteMode]::SuggestAppend
-$ComboBoxBitrate.AutoCompleteSource = [System.Windows.Forms.AutoCompleteSource]::CustomSource
-$ComboBoxBitrate.FormattingEnabled = $true
-$ComboBoxBitrate.Items.AddRange([System.Object[]]@([System.String]'1M',[System.String]'1,5M',[System.String]'2M',[System.String]'2,5M',[System.String]'3M',[System.String]'5M',[System.String]'6M',[System.String]'7M',[System.String]'8M',[System.String]'9M',[System.String]'10M',[System.String]'11M',[System.String]'12M'))
-$ComboBoxBitrate.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]4,[System.Int32]137))
-$ComboBoxBitrate.Name = [System.String]'ComboBoxBitrate'
-$ComboBoxBitrate.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]173,[System.Int32]25))
-$ComboBoxBitrate.TabIndex = [System.Int32]18
-$ComboBoxBitrate.Text = [System.String]'2M'
+$ButtonConnect.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]509,[System.Int32]259))
+$ButtonConnect.Name = [System.String]'ButtonConnect'
+$ButtonConnect.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]75,[System.Int32]23))
+$ButtonConnect.TabIndex = [System.Int32]19
+$ButtonConnect.Text = [System.String]'Connect'
+$ButtonConnect.UseCompatibleTextRendering = $true
+$ButtonConnect.UseVisualStyleBackColor = $true
+#
+#Label1
+#
+$Label1.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]2,[System.Int32]430))
+$Label1.Name = [System.String]'Label1'
+$Label1.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]613,[System.Int32]23))
+$Label1.TabIndex = [System.Int32]20
+$Label1.Text = [System.String]'Label1'
+$Label1.UseCompatibleTextRendering = $true
 #
 #FormScrcpy
 #
 $FormScrcpy.ClientSize = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]610,[System.Int32]450))
+$FormScrcpy.Controls.Add($Label1)
 $FormScrcpy.Controls.Add($PanelMain)
 $FormScrcpy.Controls.Add($PictureBoxLogo)
 $FormScrcpy.Controls.Add($LabelMain)
@@ -494,6 +532,8 @@ Add-Member -InputObject $FormScrcpy -Name LabelMaxSize -Value $LabelMaxSize -Mem
 Add-Member -InputObject $FormScrcpy -Name LabelBitrate -Value $LabelBitrate -MemberType NoteProperty
 Add-Member -InputObject $FormScrcpy -Name LabelMaxFPS -Value $LabelMaxFPS -MemberType NoteProperty
 Add-Member -InputObject $FormScrcpy -Name PanelMain -Value $PanelMain -MemberType NoteProperty
+Add-Member -InputObject $FormScrcpy -Name ButtonConnect -Value $ButtonConnect -MemberType NoteProperty
+Add-Member -InputObject $FormScrcpy -Name ButtonExit -Value $ButtonExit -MemberType NoteProperty
 Add-Member -InputObject $FormScrcpy -Name PanelSettings -Value $PanelSettings -MemberType NoteProperty
 Add-Member -InputObject $FormScrcpy -Name ComboBoxBitrate -Value $ComboBoxBitrate -MemberType NoteProperty
 Add-Member -InputObject $FormScrcpy -Name ComboBoxMaxSize -Value $ComboBoxMaxSize -MemberType NoteProperty
@@ -522,5 +562,6 @@ Add-Member -InputObject $FormScrcpy -Name RadioButtonNaturalOrientation -Value $
 Add-Member -InputObject $FormScrcpy -Name PanelCropScreen -Value $PanelCropScreen -MemberType NoteProperty
 Add-Member -InputObject $FormScrcpy -Name ButtonCropScreen -Value $ButtonCropScreen -MemberType NoteProperty
 Add-Member -InputObject $FormScrcpy -Name TextBoxCropScreen -Value $TextBoxCropScreen -MemberType NoteProperty
+Add-Member -InputObject $FormScrcpy -Name Label1 -Value $Label1 -MemberType NoteProperty
 }
 . InitializeComponent
