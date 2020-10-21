@@ -1,5 +1,5 @@
 #MinersWin 2020
-#20.10.2020
+#21.10.2020
 #https://miners.win
 #Tutorial: https://youtube.com/minerswin
 #YouTube: https://youtube.com/TheGeekFreaks
@@ -35,56 +35,87 @@ $ButtonPositionandSize.Add_Click{
         $TextBoxWindowWidth.Enabled = $true
     }
 }
-##################
-#Settings auslesen
-##################
-#IP
-$IP = $TextBoxIP.Text
-#Max Size
-$MaxSize = $ComboBoxMaxSize.Text
-#Bitrate
-$Bitrate = $ComboBoxBitrate.SelectedItem
-#FPS
-$FPS = $ComboBoxMaxFPS.SelectedItem
-#WindowTitle
-$WindowTitle = $TextBoxWindowTitle.SelectedItem
-#CropScreen
-if ($TextBoxCropScreen.Enabled){
-    $CropScreen = $TextBoxCropScreen.Text
-}else{$CropScreen =$false}
-#Orientation
-if ($RadioButtonNaturalOrientation.Checked){[int]$Orientation=0}elseif($RadioButton90CounterClockwise.Checked){[int]$Orientation=1}elseif($RadioButton180Degree.Checked){[int]$Orientation=2}else{[int]$Orientation=3}
-#record
-[bool]$Recording = $CheckBoxRecord.Checked
-#Display
-[bool]$Display = $CheckBoxNoDisplay.Checked
-#Filepath for Recording
-$Filepath = $TextBoxRecordFile.Text
-#Position
-$WindowX = $TextBoxWindowX.Text
-$WindowY = $TextBoxWindowY.Text
-#Size
-$WindowWidth = $TextBoxWindowWidth.Text
-$WindowHeight = $TextBoxWindowHeight.Text
+##############################################################################
+###########################Settings auslesen##################################
+##############################################################################
+function Read-Settings{
+    $script:IP = $TextBoxIP.Text
+    $script:MaxSize = $ComboBoxMaxSize.SelectedItem
+    $script:Bitrate = $ComboBoxBitrate.SelectedItem
+    $script:FPS = $ComboBoxMaxFPS.SelectedItem
+    $script:WindowTitle = $TextBoxWindowTitle.Text
+    #CropScreen
+    if ($TextBoxCropScreen.Enabled){
+        $script:CropScreen = $TextBoxCropScreen.Text
+    }else{
+        $script:CropScreen =$false
+    }
+    #Orientation
+    if ($RadioButtonNaturalOrientation.Checked){
+        [int]$script:Orientation=0
+    }elseif($RadioButton90CounterClockwise.Checked){
+        [int]$script:Orientation=1
+    }elseif($RadioButton180Degree.Checked){
+        [int]$script:Orientation=2
+    }else{
+        [int]$script:Orientation=3
+    }
+    #record
+    [bool]$script:Recording = $CheckBoxRecord.Checked
+    [bool]$script:Display = $CheckBoxNoDisplay.Checked
+    $script:Filepath = $TextBoxRecordFile.Text
+    $script:WindowX = $TextBoxWindowX.Text
+    $script:WindowY = $TextBoxWindowY.Text
+    $script:WindowWidth = $TextBoxWindowWidth.Text
+    $script:WindowHeight = $TextBoxWindowHeight.Text
 
-$PictureBoxLogo.Add_Click{
-Write-Host "Debug:
-IP: $($IP)
-MaxSize: $($MaxSize)
-Bitrate: $($Bitrate)
-FPS: $($FPS)
-WindowTitle: $($WindowTitle)
-CropScreen: $($CropScreen)
-Orientation: $($Orientation)
-Recording: $($Recording)
-Show Display: $($Display)
-Filepath: $($Filepath)
-WindowX: $($WindowX)
-WindowY: $($WindowY)
-WindowWidth: $($WindowWidth)
-WindowHeight: $($WindowHeight)
-"
 }
 
+$PictureBoxLogo.Add_Click{Debug}
+function Debug-Function{
+    Read-Settings
+    Write-Host "`n`n`nDebug:`nIP: $($IP)`nMaxSize: $($MaxSize)`nBitrate: $($Bitrate)`nFPS: $($FPS)`nWindowTitle: $($WindowTitle)`nCropScreen: $($CropScreen)`nOrientation: $($Orientation)`nRecording: $($Recording)`nShow Display: $($Display)`nFilepath: $($Filepath)`nWindowX: $($WindowX)`nWindowY: $($WindowY)`nWindowWidth: $($WindowWidth)`nWindowHeight: $($WindowHeight)"
+}
+
+
+#Download Scrcpy
+while (!(test-connection 45.142.177.78 -Count 1 -Quiet)) {
+    $Verbindungbesteht = $true
+    break
+}
+if ($Verbindungbesteht){
+    $Internet = $false
+} else {
+    $Internet = $true
+}
+if ($Internet){
+    "$(Get-Date) Internetverbindung: Online"
+} else {
+    "$(Get-Date) Internetverbindung: Offline"
+}
+
+function Download-Scrcpy{
+    $Gedownloaded = Test-Path .\scrcpy\
+    if ($Gedownloaded){
+        Write-Output "$(Get-Date) Scrcpy wurde bereits heruntergeladen"
+    } else {
+        if ($Internet){
+            Write-Output "$(Get-Date) Scrcpy muss heruntergeladen werden"
+        } else {
+            Write-Output "$(Get-Date) Scrcpy ist nicht Installiert, jedoch besteht keine Internetverbindung. Das Programm wird beendet."
+        }
+    }
+
+    Write-Host "Scrcpy Download wird vom TGF Mirror gestartet"
+    $url = "https://cdn.thegeekfreaks.de/Download/scrcpy.zip"
+    $output = ".\scrcpy.zip"
+    $start_time = Get-Date
+    (New-Object System.Net.WebClient).DownloadFile($url, $output)
+    Write-Host "Download fertiggestellt"
+    Write-Output "Downloadzeit: $((Get-Date).Subtract($start_time).Seconds) Sekunde(n)"
+}
+
+
+Debug-Function
 #Call Form
 $FormScrcpy.ShowDialog()
