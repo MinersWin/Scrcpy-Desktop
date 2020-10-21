@@ -116,26 +116,36 @@ function Download-Scrcpy{
 }
 
 function Form_String{
-    [string]$ConsoleString=""
-    $ConsoleString += "--max-size $($MaxSize) --bit-rate $($Bitrate) --max-fps $($FPS) --rotation $($Orientation) --window-title $($WindowTitle)"
+    Read-Settings
+    [string]$script:ConsoleString=""
+    $script:ConsoleString += "--max-size $($MaxSize) --bit-rate $($Bitrate) --max-fps $($FPS) --rotation $($Orientation) --window-title $($WindowTitle)"
     if ($TextBoxCropScreen.Enabled){
-        $ConsoleString += "--crop $CropScreen"
+        $script:ConsoleString += "--crop $CropScreen"
     }
     if ($Recording){
         if ($Display){
-            $ConsoleString += "--no-display"
+            $script:ConsoleString += "--no-display"
         }
-        $ConsoleString += "--record $($Filepath)"
+        $script:ConsoleString += "--record $($Filepath)"
     }
     if ($IP -ne ""){
-        $ConsoleString += "--serial $($IP)"
+        $script:ConsoleString += "--serial $($IP)"
     }
     if ($TextBoxWindowX.Enabled){
-        $ConsoleString += "--window-x $($WindowX) --window-y $($WindowY) --window-width $($WindowWidth) --window-height $($WindowHeight)"
+        $script:ConsoleString += "--window-x $($WindowX) --window-y $($WindowY) --window-width $($WindowWidth) --window-height $($WindowHeight)"
     }
+    $Label1.Text = $ConsoleString.ToString()
+}
+
+function Connect{
+    Form_String
+    Write-Host $ConsoleString
 }
 
 $TextBoxIP.Add_Click{(Download-Scrcpy)}
-Debug-Function
+$ButtonExit.Add_Click{$FormScrcpy.Close()}
+$ButtonConnect.Add_Click{Connect}
+Form_String
+Debug
 #Call Form
 $FormScrcpy.ShowDialog()
