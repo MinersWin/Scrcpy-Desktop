@@ -7,7 +7,6 @@ $FormScrcpy = New-Object -TypeName System.Windows.Forms.Form
 [System.Windows.Forms.Label]$LabelBitrate = $null
 [System.Windows.Forms.Label]$LabelMaxFPS = $null
 [System.Windows.Forms.Panel]$PanelMain = $null
-[System.Windows.Forms.Button]$ButtonConnect = $null
 [System.Windows.Forms.Button]$ButtonExit = $null
 [System.Windows.Forms.Panel]$PanelSettings = $null
 [System.Windows.Forms.ComboBox]$ComboBoxBitrate = $null
@@ -15,7 +14,11 @@ $FormScrcpy = New-Object -TypeName System.Windows.Forms.Form
 [System.Windows.Forms.ComboBox]$ComboBoxMaxFPS = $null
 [System.Windows.Forms.TextBox]$TextBoxWindowTitle = $null
 [System.Windows.Forms.Label]$LabelWindowTitle = $null
+[System.Windows.Forms.Button]$ButtonConnect = $null
 [System.Windows.Forms.Panel]$PanelPositionAndSize = $null
+[System.Windows.Forms.CheckBox]$CheckBoxFullscreen = $null
+[System.Windows.Forms.CheckBox]$CheckBoxAlwaysonTop = $null
+[System.Windows.Forms.CheckBox]$CheckBoxBorderless = $null
 [System.Windows.Forms.Button]$ButtonPositionandSize = $null
 [System.Windows.Forms.TextBox]$TextBoxWindowHeight = $null
 [System.Windows.Forms.Label]$LabelWindowHeight = $null
@@ -37,7 +40,7 @@ $FormScrcpy = New-Object -TypeName System.Windows.Forms.Form
 [System.Windows.Forms.Panel]$PanelCropScreen = $null
 [System.Windows.Forms.Button]$ButtonCropScreen = $null
 [System.Windows.Forms.TextBox]$TextBoxCropScreen = $null
-[System.Windows.Forms.Label]$Label1 = $null
+[System.Windows.Forms.Label]$LabelConnectionString = $null
 function InitializeComponent
 {
 $resources = . (Join-Path $PSScriptRoot 'scrcpy.resources.ps1')
@@ -49,6 +52,8 @@ $LabelMaxSize = (New-Object -TypeName System.Windows.Forms.Label)
 $LabelBitrate = (New-Object -TypeName System.Windows.Forms.Label)
 $LabelMaxFPS = (New-Object -TypeName System.Windows.Forms.Label)
 $PanelMain = (New-Object -TypeName System.Windows.Forms.Panel)
+$ButtonConnect = (New-Object -TypeName System.Windows.Forms.Button)
+$ButtonExit = (New-Object -TypeName System.Windows.Forms.Button)
 $PanelSettings = (New-Object -TypeName System.Windows.Forms.Panel)
 $ComboBoxBitrate = (New-Object -TypeName System.Windows.Forms.ComboBox)
 $ComboBoxMaxSize = (New-Object -TypeName System.Windows.Forms.ComboBox)
@@ -77,9 +82,10 @@ $RadioButtonNaturalOrientation = (New-Object -TypeName System.Windows.Forms.Radi
 $PanelCropScreen = (New-Object -TypeName System.Windows.Forms.Panel)
 $ButtonCropScreen = (New-Object -TypeName System.Windows.Forms.Button)
 $TextBoxCropScreen = (New-Object -TypeName System.Windows.Forms.TextBox)
-$ButtonExit = (New-Object -TypeName System.Windows.Forms.Button)
-$ButtonConnect = (New-Object -TypeName System.Windows.Forms.Button)
-$Label1 = (New-Object -TypeName System.Windows.Forms.Label)
+$LabelConnectionString = (New-Object -TypeName System.Windows.Forms.Label)
+$CheckBoxBorderless = (New-Object -TypeName System.Windows.Forms.CheckBox)
+$CheckBoxAlwaysonTop = (New-Object -TypeName System.Windows.Forms.CheckBox)
+$CheckBoxFullscreen = (New-Object -TypeName System.Windows.Forms.CheckBox)
 ([System.ComponentModel.ISupportInitialize]$PictureBoxLogo).BeginInit()
 $PanelMain.SuspendLayout()
 $PanelSettings.SuspendLayout()
@@ -92,7 +98,7 @@ $FormScrcpy.SuspendLayout()
 #LabelMain
 #
 $LabelMain.Font = (New-Object -TypeName System.Drawing.Font -ArgumentList @([System.String]'Tahoma',[System.Single]12,[System.Drawing.FontStyle]::Regular,[System.Drawing.GraphicsUnit]::Point,([System.Byte][System.Byte]0)))
-$LabelMain.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]12,[System.Int32]9))
+$LabelMain.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]2,[System.Int32]9))
 $LabelMain.Name = [System.String]'LabelMain'
 $LabelMain.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]173,[System.Int32]36))
 $LabelMain.TabIndex = [System.Int32]0
@@ -102,9 +108,9 @@ $LabelMain.UseCompatibleTextRendering = $true
 #PictureBoxLogo
 #
 $PictureBoxLogo.Image = ([System.Drawing.Image]$resources.'PictureBoxLogo.Image')
-$PictureBoxLogo.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]258,[System.Int32]9))
+$PictureBoxLogo.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]296,[System.Int32]12))
 $PictureBoxLogo.Name = [System.String]'PictureBoxLogo'
-$PictureBoxLogo.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]343,[System.Int32]99))
+$PictureBoxLogo.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]305,[System.Int32]96))
 $PictureBoxLogo.SizeMode = [System.Windows.Forms.PictureBoxSizeMode]::StretchImage
 $PictureBoxLogo.TabIndex = [System.Int32]1
 $PictureBoxLogo.TabStop = $false
@@ -158,18 +164,38 @@ $LabelMaxFPS.UseCompatibleTextRendering = $true
 #
 $PanelMain.AutoScroll = $true
 $PanelMain.BorderStyle = [System.Windows.Forms.BorderStyle]::Fixed3D
-$PanelMain.Controls.Add($ButtonConnect)
 $PanelMain.Controls.Add($ButtonExit)
 $PanelMain.Controls.Add($PanelSettings)
+$PanelMain.Controls.Add($ButtonConnect)
 $PanelMain.Controls.Add($PanelPositionAndSize)
 $PanelMain.Controls.Add($PanelRecord)
 $PanelMain.Controls.Add($PanelOrientation)
 $PanelMain.Controls.Add($PanelCropScreen)
 $PanelMain.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]12,[System.Int32]114))
 $PanelMain.Name = [System.String]'PanelMain'
-$PanelMain.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]603,[System.Int32]318))
+$PanelMain.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]603,[System.Int32]406))
 $PanelMain.TabIndex = [System.Int32]10
 $PanelMain.add_Paint($Panel1_Paint)
+#
+#ButtonConnect
+#
+$ButtonConnect.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]507,[System.Int32]376))
+$ButtonConnect.Name = [System.String]'ButtonConnect'
+$ButtonConnect.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]75,[System.Int32]23))
+$ButtonConnect.TabIndex = [System.Int32]19
+$ButtonConnect.Text = [System.String]'Connect'
+$ButtonConnect.UseCompatibleTextRendering = $true
+$ButtonConnect.UseVisualStyleBackColor = $true
+#
+#ButtonExit
+#
+$ButtonExit.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]426,[System.Int32]376))
+$ButtonExit.Name = [System.String]'ButtonExit'
+$ButtonExit.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]75,[System.Int32]23))
+$ButtonExit.TabIndex = [System.Int32]18
+$ButtonExit.Text = [System.String]'Exit'
+$ButtonExit.UseCompatibleTextRendering = $true
+$ButtonExit.UseVisualStyleBackColor = $true
 #
 #PanelSettings
 #
@@ -248,6 +274,9 @@ $LabelWindowTitle.UseCompatibleTextRendering = $true
 #PanelPositionAndSize
 #
 $PanelPositionAndSize.BorderStyle = [System.Windows.Forms.BorderStyle]::Fixed3D
+$PanelPositionAndSize.Controls.Add($CheckBoxFullscreen)
+$PanelPositionAndSize.Controls.Add($CheckBoxAlwaysonTop)
+$PanelPositionAndSize.Controls.Add($CheckBoxBorderless)
 $PanelPositionAndSize.Controls.Add($ButtonPositionandSize)
 $PanelPositionAndSize.Controls.Add($TextBoxWindowHeight)
 $PanelPositionAndSize.Controls.Add($LabelWindowHeight)
@@ -259,7 +288,7 @@ $PanelPositionAndSize.Controls.Add($TextBoxWindowX)
 $PanelPositionAndSize.Controls.Add($LabelWindowX)
 $PanelPositionAndSize.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]401,[System.Int32]3))
 $PanelPositionAndSize.Name = [System.String]'PanelPositionAndSize'
-$PanelPositionAndSize.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]186,[System.Int32]248))
+$PanelPositionAndSize.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]186,[System.Int32]331))
 $PanelPositionAndSize.TabIndex = [System.Int32]16
 #
 #ButtonPositionandSize
@@ -470,39 +499,49 @@ $TextBoxCropScreen.Size = (New-Object -TypeName System.Drawing.Size -ArgumentLis
 $TextBoxCropScreen.TabIndex = [System.Int32]11
 $TextBoxCropScreen.Text = [System.String]'1224:1440:0:0'
 #
-#ButtonExit
+#LabelConnectionString
 #
-$ButtonExit.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]509,[System.Int32]288))
-$ButtonExit.Name = [System.String]'ButtonExit'
-$ButtonExit.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]75,[System.Int32]23))
-$ButtonExit.TabIndex = [System.Int32]18
-$ButtonExit.Text = [System.String]'Exit'
-$ButtonExit.UseCompatibleTextRendering = $true
-$ButtonExit.UseVisualStyleBackColor = $true
+$LabelConnectionString.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]2,[System.Int32]523))
+$LabelConnectionString.Name = [System.String]'LabelConnectionString'
+$LabelConnectionString.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]613,[System.Int32]33))
+$LabelConnectionString.TabIndex = [System.Int32]20
+$LabelConnectionString.Text = [System.String]'<ConnectionString>'
+$LabelConnectionString.UseCompatibleTextRendering = $true
 #
-#ButtonConnect
+#CheckBoxBorderless
 #
-$ButtonConnect.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]509,[System.Int32]259))
-$ButtonConnect.Name = [System.String]'ButtonConnect'
-$ButtonConnect.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]75,[System.Int32]23))
-$ButtonConnect.TabIndex = [System.Int32]19
-$ButtonConnect.Text = [System.String]'Connect'
-$ButtonConnect.UseCompatibleTextRendering = $true
-$ButtonConnect.UseVisualStyleBackColor = $true
+$CheckBoxBorderless.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]244))
+$CheckBoxBorderless.Name = [System.String]'CheckBoxBorderless'
+$CheckBoxBorderless.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]176,[System.Int32]24))
+$CheckBoxBorderless.TabIndex = [System.Int32]10
+$CheckBoxBorderless.Text = [System.String]'Borderless'
+$CheckBoxBorderless.UseCompatibleTextRendering = $true
+$CheckBoxBorderless.UseVisualStyleBackColor = $true
 #
-#Label1
+#CheckBoxAlwaysonTop
 #
-$Label1.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]2,[System.Int32]430))
-$Label1.Name = [System.String]'Label1'
-$Label1.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]613,[System.Int32]23))
-$Label1.TabIndex = [System.Int32]20
-$Label1.Text = [System.String]'Label1'
-$Label1.UseCompatibleTextRendering = $true
+$CheckBoxAlwaysonTop.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]274))
+$CheckBoxAlwaysonTop.Name = [System.String]'CheckBoxAlwaysonTop'
+$CheckBoxAlwaysonTop.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]176,[System.Int32]24))
+$CheckBoxAlwaysonTop.TabIndex = [System.Int32]11
+$CheckBoxAlwaysonTop.Text = [System.String]'Always on Top'
+$CheckBoxAlwaysonTop.UseCompatibleTextRendering = $true
+$CheckBoxAlwaysonTop.UseVisualStyleBackColor = $true
+#
+#CheckBoxFullscreen
+#
+$CheckBoxFullscreen.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]304))
+$CheckBoxFullscreen.Name = [System.String]'CheckBoxFullscreen'
+$CheckBoxFullscreen.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]176,[System.Int32]24))
+$CheckBoxFullscreen.TabIndex = [System.Int32]12
+$CheckBoxFullscreen.Text = [System.String]'Fullscreen'
+$CheckBoxFullscreen.UseCompatibleTextRendering = $true
+$CheckBoxFullscreen.UseVisualStyleBackColor = $true
 #
 #FormScrcpy
 #
-$FormScrcpy.ClientSize = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]610,[System.Int32]450))
-$FormScrcpy.Controls.Add($Label1)
+$FormScrcpy.ClientSize = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]610,[System.Int32]554))
+$FormScrcpy.Controls.Add($LabelConnectionString)
 $FormScrcpy.Controls.Add($PanelMain)
 $FormScrcpy.Controls.Add($PictureBoxLogo)
 $FormScrcpy.Controls.Add($LabelMain)
@@ -532,7 +571,6 @@ Add-Member -InputObject $FormScrcpy -Name LabelMaxSize -Value $LabelMaxSize -Mem
 Add-Member -InputObject $FormScrcpy -Name LabelBitrate -Value $LabelBitrate -MemberType NoteProperty
 Add-Member -InputObject $FormScrcpy -Name LabelMaxFPS -Value $LabelMaxFPS -MemberType NoteProperty
 Add-Member -InputObject $FormScrcpy -Name PanelMain -Value $PanelMain -MemberType NoteProperty
-Add-Member -InputObject $FormScrcpy -Name ButtonConnect -Value $ButtonConnect -MemberType NoteProperty
 Add-Member -InputObject $FormScrcpy -Name ButtonExit -Value $ButtonExit -MemberType NoteProperty
 Add-Member -InputObject $FormScrcpy -Name PanelSettings -Value $PanelSettings -MemberType NoteProperty
 Add-Member -InputObject $FormScrcpy -Name ComboBoxBitrate -Value $ComboBoxBitrate -MemberType NoteProperty
@@ -540,7 +578,11 @@ Add-Member -InputObject $FormScrcpy -Name ComboBoxMaxSize -Value $ComboBoxMaxSiz
 Add-Member -InputObject $FormScrcpy -Name ComboBoxMaxFPS -Value $ComboBoxMaxFPS -MemberType NoteProperty
 Add-Member -InputObject $FormScrcpy -Name TextBoxWindowTitle -Value $TextBoxWindowTitle -MemberType NoteProperty
 Add-Member -InputObject $FormScrcpy -Name LabelWindowTitle -Value $LabelWindowTitle -MemberType NoteProperty
+Add-Member -InputObject $FormScrcpy -Name ButtonConnect -Value $ButtonConnect -MemberType NoteProperty
 Add-Member -InputObject $FormScrcpy -Name PanelPositionAndSize -Value $PanelPositionAndSize -MemberType NoteProperty
+Add-Member -InputObject $FormScrcpy -Name CheckBoxFullscreen -Value $CheckBoxFullscreen -MemberType NoteProperty
+Add-Member -InputObject $FormScrcpy -Name CheckBoxAlwaysonTop -Value $CheckBoxAlwaysonTop -MemberType NoteProperty
+Add-Member -InputObject $FormScrcpy -Name CheckBoxBorderless -Value $CheckBoxBorderless -MemberType NoteProperty
 Add-Member -InputObject $FormScrcpy -Name ButtonPositionandSize -Value $ButtonPositionandSize -MemberType NoteProperty
 Add-Member -InputObject $FormScrcpy -Name TextBoxWindowHeight -Value $TextBoxWindowHeight -MemberType NoteProperty
 Add-Member -InputObject $FormScrcpy -Name LabelWindowHeight -Value $LabelWindowHeight -MemberType NoteProperty
@@ -562,6 +604,6 @@ Add-Member -InputObject $FormScrcpy -Name RadioButtonNaturalOrientation -Value $
 Add-Member -InputObject $FormScrcpy -Name PanelCropScreen -Value $PanelCropScreen -MemberType NoteProperty
 Add-Member -InputObject $FormScrcpy -Name ButtonCropScreen -Value $ButtonCropScreen -MemberType NoteProperty
 Add-Member -InputObject $FormScrcpy -Name TextBoxCropScreen -Value $TextBoxCropScreen -MemberType NoteProperty
-Add-Member -InputObject $FormScrcpy -Name Label1 -Value $Label1 -MemberType NoteProperty
+Add-Member -InputObject $FormScrcpy -Name LabelConnectionString -Value $LabelConnectionString -MemberType NoteProperty
 }
 . InitializeComponent
