@@ -8,6 +8,7 @@
 #Dev: https://miners.win
 Add-Type -AssemblyName System.Windows.Forms
 . (Join-Path $PSScriptRoot 'scrcpy.designer.ps1')
+$TextBoxWindowTitle.Text = "Scrcpy"
 
 ##Initial Settings
 $RadioButtonNaturalOrientation.Checked = $true
@@ -43,7 +44,7 @@ function Read-Settings{
     $script:MaxSize = $ComboBoxMaxSize.SelectedItem
     $script:Bitrate = $ComboBoxBitrate.SelectedItem
     $script:FPS = $ComboBoxMaxFPS.SelectedItem
-    $script:WindowTitle = $TextBoxWindowTitle.Text
+    [string]$script:WindowTitle = $TextBoxWindowTitle.Text
     #CropScreen
     if ($TextBoxCropScreen.Enabled){
         $script:CropScreen = $TextBoxCropScreen.Text
@@ -113,26 +114,37 @@ function Download-Scrcpy{
     (New-Object System.Net.WebClient).DownloadFile($url, $output)
     Write-Host "Download fertiggestellt"
     Write-Output "Downloadzeit: $((Get-Date).Subtract($start_time).Seconds) Sekunde(n)"
+
+    Expand-Archive -Path .\scrcpy.zip -DestinationPath .\scrcpy\
 }
 
 function Form_String{
     Read-Settings
-    [string]$script:ConsoleString=""
-    $script:ConsoleString += "--max-size $($MaxSize) --bit-rate $($Bitrate) --max-fps $($FPS) --rotation $($Orientation) --window-title $($WindowTitle)"
+    $script:ConsoleString=""
+    $script:ConsoleString += "-m $($MaxSize) --bit-rate $($Bitrate) --max-fps $($FPS) --rotation $($Orientation) --window-title $($WindowTitle)"
     if ($TextBoxCropScreen.Enabled){
-        $script:ConsoleString += "--crop $CropScreen"
+        $script:ConsoleString += " --crop $CropScreen"
     }
     if ($Recording){
         if ($Display){
-            $script:ConsoleString += "--no-display"
+            $script:ConsoleString += " --no-display"
         }
-        $script:ConsoleString += "--record $($Filepath)"
+        $script:ConsoleString += " --record $($Filepath)"
     }
     if ($IP -ne ""){
-        $script:ConsoleString += "--serial $($IP)"
+        $script:ConsoleString += " --serial $($IP)"
     }
     if ($TextBoxWindowX.Enabled){
-        $script:ConsoleString += "--window-x $($WindowX) --window-y $($WindowY) --window-width $($WindowWidth) --window-height $($WindowHeight)"
+        $script:ConsoleString += " --window-x $($WindowX) --window-y $($WindowY) --window-width $($WindowWidth) --window-height $($WindowHeight)"
+    }
+    if ($CheckBoxBorderless.Checked){
+        $script:ConsoleString += " --window-borderless"
+    }
+    if ($CheckBoxAlwaysonTop.Checked){
+        $script:ConsoleString += " --always-on-top"
+    }
+    if ($CheckBoxFullscreen.Checked){
+        $script:ConsoleString += " --fullscreen"
     }
     $LabelConnectionString.Text = $ConsoleString.ToString()
 }
@@ -140,6 +152,9 @@ function Form_String{
 function Connect{
     Form_String
     Write-Host $ConsoleString
+    #.\scrcpy\scrcpy.exe $ConsoleString
+    Start-Process .\scrcpy\scrcpy.exe -ArgumentList $ConsoleString
+    #start .\scrcpy.exe /c "$($ConsoleString)"
 }
 
 $TextBoxIP.Add_Click{(Download-Scrcpy)}
