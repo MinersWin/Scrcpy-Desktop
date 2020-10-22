@@ -9,6 +9,8 @@
 Add-Type -AssemblyName System.Windows.Forms
 . (Join-Path $PSScriptRoot 'scrcpy.designer.ps1')
 $TextBoxWindowTitle.Text = "Scrcpy"
+$Gedownloaded = Test-Path .\scrcpy\
+if ($Gedownloaded){$ButtonDownload.ForeColor = "Green"; $ButtonDownload.Text = "Scrcpy Installiert"; $ButtonDownload.Enabled = $false}else{$ButtonDownload.ForeColor = "Red"; $ButtonDownload.Text="Scrcpy Installieren";$ButtonDownload.Enabled = $true}
 
 ##Initial Settings
 $RadioButtonNaturalOrientation.Checked = $true
@@ -41,9 +43,9 @@ $ButtonPositionandSize.Add_Click{
 ##############################################################################
 function Read-Settings{
     $script:IP = $TextBoxIP.Text
-    $script:MaxSize = $ComboBoxMaxSize.SelectedItem
-    $script:Bitrate = $ComboBoxBitrate.SelectedItem
-    $script:FPS = $ComboBoxMaxFPS.SelectedItem
+    $script:MaxSize = $ComboBoxMaxSize.Text
+    $script:Bitrate = $ComboBoxBitrate.Text
+    $script:FPS = $ComboBoxMaxFPS.Text
     [string]$script:WindowTitle = $TextBoxWindowTitle.Text
     #CropScreen
     if ($TextBoxCropScreen.Enabled){
@@ -95,27 +97,38 @@ if ($Internet){
     "$(Get-Date) Internetverbindung: Offline"
 }
 
-function Download-Scrcpy{
+function Test-Download{
     $Gedownloaded = Test-Path .\scrcpy\
     if ($Gedownloaded){
         Write-Output "$(Get-Date) Scrcpy wurde bereits heruntergeladen"
+        $ButtonDownload.ForeColor = Green
     } else {
         if ($Internet){
             Write-Output "$(Get-Date) Scrcpy muss heruntergeladen werden"
+            Download-Scrcpy
         } else {
             Write-Output "$(Get-Date) Scrcpy ist nicht Installiert, jedoch besteht keine Internetverbindung. Das Programm wird beendet."
+            $FormScrcpy.Close()
         }
     }
+}
+function Download-Scrcpy{
+    if ($Gedownloaded){
 
-    Write-Host "Scrcpy Download wird vom TGF Mirror gestartet"
-    $url = "https://cdn.thegeekfreaks.de/Download/scrcpy.zip"
-    $output = ".\scrcpy.zip"
-    $start_time = Get-Date
-    (New-Object System.Net.WebClient).DownloadFile($url, $output)
-    Write-Host "Download fertiggestellt"
-    Write-Output "Downloadzeit: $((Get-Date).Subtract($start_time).Seconds) Sekunde(n)"
-
-    Expand-Archive -Path .\scrcpy.zip -DestinationPath .\scrcpy\
+    }else{
+        Write-Host "Scrcpy Download wird vom TGF Mirror gestartet"
+        $url = "https://cdn.thegeekfreaks.de/Download/scrcpy.zip"
+        $output = ".\scrcpy.zip"
+        $start_time = Get-Date
+        (New-Object System.Net.WebClient).DownloadFile($url, $output)
+        Write-Host "Download fertiggestellt`nDownloadzeit: $((Get-Date).Subtract($start_time).Seconds) Sekunde(n)`nEntpacke Archiv ..."
+        Expand-Archive -Path .\scrcpy.zip -DestinationPath .\scrcpy\
+        Write-Host "Archiv erfolgreich entpackt, Lösche Temporäre Download Files ...."
+        rm .\scrcpy.zip
+        Write-Host "Done" -ForegroundColor Green
+    }
+    $Gedownloaded = Test-Path .\scrcpy\
+    if ($Gedownloaded){$ButtonDownload.ForeColor = "Green"; $ButtonDownload.Text = "Scrcpy Installiert"; $ButtonDownload.Enabled = $false}else{$ButtonDownload.ForeColor = "Red"; $ButtonDownload.Text="Scrcpy Installieren";$ButtonDownload.Enabled = $true}
 }
 
 function Form_String{
@@ -157,7 +170,7 @@ function Connect{
     #start .\scrcpy.exe /c "$($ConsoleString)"
 }
 
-$TextBoxIP.Add_Click{(Download-Scrcpy)}
+$ButtonDownload.Add_Click{(Test-Download)}
 $ButtonExit.Add_Click{$FormScrcpy.Close()}
 $ButtonConnect.Add_Click{Connect}
 $LabelConnectionString.Add_Click{[System.Windows.Forms.MessageBox]::Show($ConsoleString,"TGF Scrcpy",1)}

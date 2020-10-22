@@ -7,6 +7,7 @@ $FormScrcpy = New-Object -TypeName System.Windows.Forms.Form
 [System.Windows.Forms.Label]$LabelBitrate = $null
 [System.Windows.Forms.Label]$LabelMaxFPS = $null
 [System.Windows.Forms.Panel]$PanelMain = $null
+[System.Windows.Forms.Button]$ButtonDownload = $null
 [System.Windows.Forms.Button]$ButtonExit = $null
 [System.Windows.Forms.Panel]$PanelSettings = $null
 [System.Windows.Forms.ComboBox]$ComboBoxBitrate = $null
@@ -86,6 +87,7 @@ $LabelConnectionString = (New-Object -TypeName System.Windows.Forms.Label)
 $CheckBoxBorderless = (New-Object -TypeName System.Windows.Forms.CheckBox)
 $CheckBoxAlwaysonTop = (New-Object -TypeName System.Windows.Forms.CheckBox)
 $CheckBoxFullscreen = (New-Object -TypeName System.Windows.Forms.CheckBox)
+$ButtonDownload = (New-Object -TypeName System.Windows.Forms.Button)
 ([System.ComponentModel.ISupportInitialize]$PictureBoxLogo).BeginInit()
 $PanelMain.SuspendLayout()
 $PanelSettings.SuspendLayout()
@@ -164,6 +166,7 @@ $LabelMaxFPS.UseCompatibleTextRendering = $true
 #
 $PanelMain.AutoScroll = $true
 $PanelMain.BorderStyle = [System.Windows.Forms.BorderStyle]::Fixed3D
+$PanelMain.Controls.Add($ButtonDownload)
 $PanelMain.Controls.Add($ButtonExit)
 $PanelMain.Controls.Add($PanelSettings)
 $PanelMain.Controls.Add($ButtonConnect)
@@ -538,6 +541,17 @@ $CheckBoxFullscreen.Text = [System.String]'Fullscreen'
 $CheckBoxFullscreen.UseCompatibleTextRendering = $true
 $CheckBoxFullscreen.UseVisualStyleBackColor = $true
 #
+#ButtonDownload
+#
+$ButtonDownload.Font = (New-Object -TypeName System.Drawing.Font -ArgumentList @([System.String]'Tahoma',[System.Single]16.2,[System.Drawing.FontStyle]::Regular,[System.Drawing.GraphicsUnit]::Point,([System.Byte][System.Byte]0)))
+$ButtonDownload.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]8,[System.Int32]297))
+$ButtonDownload.Name = [System.String]'ButtonDownload'
+$ButtonDownload.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]384,[System.Int32]86))
+$ButtonDownload.TabIndex = [System.Int32]20
+$ButtonDownload.Text = [System.String]'DOWNLOAD SCRCPY'
+$ButtonDownload.UseCompatibleTextRendering = $true
+$ButtonDownload.UseVisualStyleBackColor = $true
+#
 #FormScrcpy
 #
 $FormScrcpy.ClientSize = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]610,[System.Int32]554))
@@ -571,6 +585,7 @@ Add-Member -InputObject $FormScrcpy -Name LabelMaxSize -Value $LabelMaxSize -Mem
 Add-Member -InputObject $FormScrcpy -Name LabelBitrate -Value $LabelBitrate -MemberType NoteProperty
 Add-Member -InputObject $FormScrcpy -Name LabelMaxFPS -Value $LabelMaxFPS -MemberType NoteProperty
 Add-Member -InputObject $FormScrcpy -Name PanelMain -Value $PanelMain -MemberType NoteProperty
+Add-Member -InputObject $FormScrcpy -Name ButtonDownload -Value $ButtonDownload -MemberType NoteProperty
 Add-Member -InputObject $FormScrcpy -Name ButtonExit -Value $ButtonExit -MemberType NoteProperty
 Add-Member -InputObject $FormScrcpy -Name PanelSettings -Value $PanelSettings -MemberType NoteProperty
 Add-Member -InputObject $FormScrcpy -Name ComboBoxBitrate -Value $ComboBoxBitrate -MemberType NoteProperty
