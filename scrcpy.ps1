@@ -134,7 +134,7 @@ function Form_String{
     if ($TextBoxWindowX.Enabled){
         $script:ConsoleString += "--window-x $($WindowX) --window-y $($WindowY) --window-width $($WindowWidth) --window-height $($WindowHeight)"
     }
-    $Label1.Text = $ConsoleString.ToString()
+    $LabelConnectionString.Text = $ConsoleString.ToString()
 }
 
 function Connect{
@@ -145,6 +145,7 @@ function Connect{
 $TextBoxIP.Add_Click{(Download-Scrcpy)}
 $ButtonExit.Add_Click{$FormScrcpy.Close()}
 $ButtonConnect.Add_Click{Connect}
+$LabelConnectionString.Add_Click{[System.Windows.Forms.MessageBox]::Show($ConsoleString,"TGF Scrcpy",1)}
 Form_String
 Debug
 #Call Form
