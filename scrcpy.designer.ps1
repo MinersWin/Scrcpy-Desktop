@@ -133,7 +133,7 @@ $TextBoxIP.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @
 $TextBoxIP.Name = [System.String]'TextBoxIP'
 $TextBoxIP.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]173,[System.Int32]24))
 $TextBoxIP.TabIndex = [System.Int32]3
-$TextBoxIP.Text = [System.String]'127.0.0.1'
+$TextBoxIP.Text = [System.String]''
 #
 #LabelMaxSize
 #

@@ -178,16 +178,32 @@ function Get-ScrcpyConsoleArguments {
 }
 
 function Connect {
-    $ScrcpyArguments = Get-ScrcpyConsoleArguments
-    Write-Host "$ScrcpyArguments"
-
-    Start-Process -FilePath '.\scrcpy\scrcpy.exe' -ArgumentList $ScrcpyArguments
+	if ($TextBoxIP.Text -eq "") {
+        $ScrcpyArguments = Get-ScrcpyConsoleArguments
+		Write-Host "$ScrcpyArguments"
+		Start-Process -FilePath '.\scrcpy\scrcpy.exe' -ArgumentList $ScrcpyArguments
+    }else{
+		$ScrcpyArguments = Get-ScrcpyConsoleArguments
+		Write-Host "$ScrcpyArguments"
+		.\scrcpy\adb.exe devices
+		[System.Windows.Forms.MessageBox]::Show("Accept Connection if your Device asks for it","Connect your Smartphone with your PC",1)
+		.\scrcpy\adb.exe tcpip 5555
+		.\scrcpy\adb.exe connect (-join"$TextBoxIP.Text" + ":5555")
+		.\scrcpy\adb.exe connect $TextBoxIP.Text
+		[System.Windows.Forms.MessageBox]::Show("Disconnect your Smartphone from your PC")
+		Start-Process -FilePath '.\scrcpy\scrcpy.exe' -ArgumentList $ScrcpyArguments
+	}
 }
 
 $ButtonDownload.Add_Click{(Test-Download)}
-$ButtonExit.Add_Click{$FormScrcpy.Close()}
+$ButtonExit.Add_Click{
+	.\scrcpy\adb.exe disconnect
+	.\scrcpy\adb.exe kill-server
+	$FormScrcpy.Close()
+}
 $ButtonConnect.Add_Click{Connect}
 $LabelConnectionString.Add_Click{[System.Windows.Forms.MessageBox]::Show("$ScrcpyArguments","TGF Scrcpy",1)}
 Debug
 #Call Form
 $FormScrcpy.ShowDialog()
+
