@@ -1,9 +1,4 @@
-# Scrcpy-Desktop
-## Work in Progress
-### Release: November 2020
-#### Scrcpy Desktop Client by TheGeekFreaks
-
-![](https://img.shields.io/github/contributors/MinersWin/Scrcpy-Desktop.svg?style=for-the-badge) ![](https://img.shields.io/github/forks/minerswin/Scrcpy-Desktop.svg?style=for-the-badge) ![](https://img.shields.io/github/stars/MinersWin/Scrcpy-Desktop.svg?style=for-the-badge) ![](https://img.shields.io/github/issues/MinersWin/Scrcpy-Desktop.svg?style=for-the-badge) ![](https://img.shields.io/github/license/MinersWin/Scrcpy-Desktop.svg?style=for-the-badge)
+![](https://img.shields.io/github/contributors/MinersWin/Scrcpy-Desktop.svg?style=for-the-badge) ![](https://img.shields.io/github/forks/minerswin/Scrcpy-Desktop.svg?style=for-the-badge) ![](https://img.shields.io/github/stars/MinersWin/Scrcpy-Desktop.svg?style=for-the-badge) ![](https://img.shields.io/github/issues/MinersWin/Scrcpy-Desktop.svg?style=for-the-badge) ![](https://img.shields.io/github/license/MinersWin/Scrcpy-Desktop.svg?style=for-the-badge) ![Discord](https://img.shields.io/discord/397127284114325504?style=for-the-badge)
 
 <!-- PROJECT LOGO -->
 <br />
