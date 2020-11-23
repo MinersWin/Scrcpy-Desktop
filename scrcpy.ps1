@@ -1,11 +1,18 @@
 ﻿#MinersWin 2020
-#21.10.2020
+#23.10.2020
 #https://miners.win
 #Tutorial: https://youtube.com/minerswin
 #YouTube: https://youtube.com/TheGeekFreaks
 #Forum: https://forum.thegeekfreaks.de
 #Website: https://thegeekfreaks.de
 #Dev: https://miners.win
+#Special Thanks to Joly0!
+
+$MyDir = Split-Path $script:MyInvocation.MyCommand.Path
+Set-Location $MyDir
+
+$scrcpypath = "$($MyDir)\scrcpy\scrcpy.exe"
+$adbpath = "$($MyDir)\scrcpy\adb.exe"
 
 Add-Type -AssemblyName System.Windows.Forms
 
@@ -181,11 +188,11 @@ function Connect {
 	if ($TextBoxIP.Text -eq "") {
         $ScrcpyArguments = Get-ScrcpyConsoleArguments
 		Write-Host "$ScrcpyArguments"
-		Start-Process -FilePath '.\scrcpy\scrcpy.exe' -ArgumentList $ScrcpyArguments
+		Start-Process -FilePath $scrcpypath -ArgumentList $ScrcpyArguments
     }else{
 		$ScrcpyArguments = Get-ScrcpyConsoleArguments
 		Write-Host "$ScrcpyArguments"
-		.\scrcpy\adb.exe devices
+		Start $adbpath devices
 		[System.Windows.Forms.MessageBox]::Show("Accept Connection if your Device asks for it","Connect your Smartphone with your PC",1)
 		.\scrcpy\adb.exe tcpip 5555
 		.\scrcpy\adb.exe connect (-join"$TextBoxIP.Text" + ":5555")
@@ -197,8 +204,8 @@ function Connect {
 
 $ButtonDownload.Add_Click{(Test-Download)}
 $ButtonExit.Add_Click{
-	.\scrcpy\adb.exe disconnect
-	.\scrcpy\adb.exe kill-server
+	Start-Process -FilePath .\scrcpy\adb.exe -ArgumentList "disconnect"
+	Start-Process -FilePath .\scrcpy\adb.exe -ArgumentList "kill-server"
 	$FormScrcpy.Close()
 }
 $ButtonConnect.Add_Click{Connect}
