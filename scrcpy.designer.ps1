@@ -17,6 +17,7 @@ $FormScrcpy = New-Object -TypeName System.Windows.Forms.Form
 [System.Windows.Forms.Label]$LabelWindowTitle = $null
 [System.Windows.Forms.Button]$ButtonConnect = $null
 [System.Windows.Forms.Panel]$PanelPositionAndSize = $null
+[System.Windows.Forms.CheckBox]$CheckBoxStayAwake = $null
 [System.Windows.Forms.CheckBox]$CheckBoxFullscreen = $null
 [System.Windows.Forms.CheckBox]$CheckBoxAlwaysonTop = $null
 [System.Windows.Forms.CheckBox]$CheckBoxBorderless = $null
@@ -53,7 +54,7 @@ $LabelMaxSize = (New-Object -TypeName System.Windows.Forms.Label)
 $LabelBitrate = (New-Object -TypeName System.Windows.Forms.Label)
 $LabelMaxFPS = (New-Object -TypeName System.Windows.Forms.Label)
 $PanelMain = (New-Object -TypeName System.Windows.Forms.Panel)
-$ButtonConnect = (New-Object -TypeName System.Windows.Forms.Button)
+$ButtonDownload = (New-Object -TypeName System.Windows.Forms.Button)
 $ButtonExit = (New-Object -TypeName System.Windows.Forms.Button)
 $PanelSettings = (New-Object -TypeName System.Windows.Forms.Panel)
 $ComboBoxBitrate = (New-Object -TypeName System.Windows.Forms.ComboBox)
@@ -61,7 +62,11 @@ $ComboBoxMaxSize = (New-Object -TypeName System.Windows.Forms.ComboBox)
 $ComboBoxMaxFPS = (New-Object -TypeName System.Windows.Forms.ComboBox)
 $TextBoxWindowTitle = (New-Object -TypeName System.Windows.Forms.TextBox)
 $LabelWindowTitle = (New-Object -TypeName System.Windows.Forms.Label)
+$ButtonConnect = (New-Object -TypeName System.Windows.Forms.Button)
 $PanelPositionAndSize = (New-Object -TypeName System.Windows.Forms.Panel)
+$CheckBoxFullscreen = (New-Object -TypeName System.Windows.Forms.CheckBox)
+$CheckBoxAlwaysonTop = (New-Object -TypeName System.Windows.Forms.CheckBox)
+$CheckBoxBorderless = (New-Object -TypeName System.Windows.Forms.CheckBox)
 $ButtonPositionandSize = (New-Object -TypeName System.Windows.Forms.Button)
 $TextBoxWindowHeight = (New-Object -TypeName System.Windows.Forms.TextBox)
 $LabelWindowHeight = (New-Object -TypeName System.Windows.Forms.Label)
@@ -84,10 +89,7 @@ $PanelCropScreen = (New-Object -TypeName System.Windows.Forms.Panel)
 $ButtonCropScreen = (New-Object -TypeName System.Windows.Forms.Button)
 $TextBoxCropScreen = (New-Object -TypeName System.Windows.Forms.TextBox)
 $LabelConnectionString = (New-Object -TypeName System.Windows.Forms.Label)
-$CheckBoxBorderless = (New-Object -TypeName System.Windows.Forms.CheckBox)
-$CheckBoxAlwaysonTop = (New-Object -TypeName System.Windows.Forms.CheckBox)
-$CheckBoxFullscreen = (New-Object -TypeName System.Windows.Forms.CheckBox)
-$ButtonDownload = (New-Object -TypeName System.Windows.Forms.Button)
+$CheckBoxStayAwake = (New-Object -TypeName System.Windows.Forms.CheckBox)
 ([System.ComponentModel.ISupportInitialize]$PictureBoxLogo).BeginInit()
 $PanelMain.SuspendLayout()
 $PanelSettings.SuspendLayout()
@@ -133,7 +135,6 @@ $TextBoxIP.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @
 $TextBoxIP.Name = [System.String]'TextBoxIP'
 $TextBoxIP.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]173,[System.Int32]24))
 $TextBoxIP.TabIndex = [System.Int32]3
-$TextBoxIP.Text = [System.String]''
 #
 #LabelMaxSize
 #
@@ -180,15 +181,16 @@ $PanelMain.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([Sys
 $PanelMain.TabIndex = [System.Int32]10
 $PanelMain.add_Paint($Panel1_Paint)
 #
-#ButtonConnect
+#ButtonDownload
 #
-$ButtonConnect.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]507,[System.Int32]376))
-$ButtonConnect.Name = [System.String]'ButtonConnect'
-$ButtonConnect.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]75,[System.Int32]23))
-$ButtonConnect.TabIndex = [System.Int32]19
-$ButtonConnect.Text = [System.String]'Connect'
-$ButtonConnect.UseCompatibleTextRendering = $true
-$ButtonConnect.UseVisualStyleBackColor = $true
+$ButtonDownload.Font = (New-Object -TypeName System.Drawing.Font -ArgumentList @([System.String]'Tahoma',[System.Single]16.2,[System.Drawing.FontStyle]::Regular,[System.Drawing.GraphicsUnit]::Point,([System.Byte][System.Byte]0)))
+$ButtonDownload.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]8,[System.Int32]297))
+$ButtonDownload.Name = [System.String]'ButtonDownload'
+$ButtonDownload.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]384,[System.Int32]86))
+$ButtonDownload.TabIndex = [System.Int32]20
+$ButtonDownload.Text = [System.String]'DOWNLOAD SCRCPY'
+$ButtonDownload.UseCompatibleTextRendering = $true
+$ButtonDownload.UseVisualStyleBackColor = $true
 #
 #ButtonExit
 #
@@ -274,9 +276,20 @@ $LabelWindowTitle.TabIndex = [System.Int32]14
 $LabelWindowTitle.Text = [System.String]'Window Title'
 $LabelWindowTitle.UseCompatibleTextRendering = $true
 #
+#ButtonConnect
+#
+$ButtonConnect.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]507,[System.Int32]376))
+$ButtonConnect.Name = [System.String]'ButtonConnect'
+$ButtonConnect.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]75,[System.Int32]23))
+$ButtonConnect.TabIndex = [System.Int32]19
+$ButtonConnect.Text = [System.String]'Connect'
+$ButtonConnect.UseCompatibleTextRendering = $true
+$ButtonConnect.UseVisualStyleBackColor = $true
+#
 #PanelPositionAndSize
 #
 $PanelPositionAndSize.BorderStyle = [System.Windows.Forms.BorderStyle]::Fixed3D
+$PanelPositionAndSize.Controls.Add($CheckBoxStayAwake)
 $PanelPositionAndSize.Controls.Add($CheckBoxFullscreen)
 $PanelPositionAndSize.Controls.Add($CheckBoxAlwaysonTop)
 $PanelPositionAndSize.Controls.Add($CheckBoxBorderless)
@@ -291,8 +304,38 @@ $PanelPositionAndSize.Controls.Add($TextBoxWindowX)
 $PanelPositionAndSize.Controls.Add($LabelWindowX)
 $PanelPositionAndSize.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]401,[System.Int32]3))
 $PanelPositionAndSize.Name = [System.String]'PanelPositionAndSize'
-$PanelPositionAndSize.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]186,[System.Int32]331))
+$PanelPositionAndSize.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]186,[System.Int32]367))
 $PanelPositionAndSize.TabIndex = [System.Int32]16
+#
+#CheckBoxFullscreen
+#
+$CheckBoxFullscreen.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]304))
+$CheckBoxFullscreen.Name = [System.String]'CheckBoxFullscreen'
+$CheckBoxFullscreen.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]176,[System.Int32]24))
+$CheckBoxFullscreen.TabIndex = [System.Int32]12
+$CheckBoxFullscreen.Text = [System.String]'Fullscreen'
+$CheckBoxFullscreen.UseCompatibleTextRendering = $true
+$CheckBoxFullscreen.UseVisualStyleBackColor = $true
+#
+#CheckBoxAlwaysonTop
+#
+$CheckBoxAlwaysonTop.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]274))
+$CheckBoxAlwaysonTop.Name = [System.String]'CheckBoxAlwaysonTop'
+$CheckBoxAlwaysonTop.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]176,[System.Int32]24))
+$CheckBoxAlwaysonTop.TabIndex = [System.Int32]11
+$CheckBoxAlwaysonTop.Text = [System.String]'Always on Top'
+$CheckBoxAlwaysonTop.UseCompatibleTextRendering = $true
+$CheckBoxAlwaysonTop.UseVisualStyleBackColor = $true
+#
+#CheckBoxBorderless
+#
+$CheckBoxBorderless.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]244))
+$CheckBoxBorderless.Name = [System.String]'CheckBoxBorderless'
+$CheckBoxBorderless.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]176,[System.Int32]24))
+$CheckBoxBorderless.TabIndex = [System.Int32]10
+$CheckBoxBorderless.Text = [System.String]'Borderless'
+$CheckBoxBorderless.UseCompatibleTextRendering = $true
+$CheckBoxBorderless.UseVisualStyleBackColor = $true
 #
 #ButtonPositionandSize
 #
@@ -511,46 +554,15 @@ $LabelConnectionString.TabIndex = [System.Int32]20
 $LabelConnectionString.Text = [System.String]'<ConnectionString>'
 $LabelConnectionString.UseCompatibleTextRendering = $true
 #
-#CheckBoxBorderless
+#CheckBoxStayAwake
 #
-$CheckBoxBorderless.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]244))
-$CheckBoxBorderless.Name = [System.String]'CheckBoxBorderless'
-$CheckBoxBorderless.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]176,[System.Int32]24))
-$CheckBoxBorderless.TabIndex = [System.Int32]10
-$CheckBoxBorderless.Text = [System.String]'Borderless'
-$CheckBoxBorderless.UseCompatibleTextRendering = $true
-$CheckBoxBorderless.UseVisualStyleBackColor = $true
-#
-#CheckBoxAlwaysonTop
-#
-$CheckBoxAlwaysonTop.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]274))
-$CheckBoxAlwaysonTop.Name = [System.String]'CheckBoxAlwaysonTop'
-$CheckBoxAlwaysonTop.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]176,[System.Int32]24))
-$CheckBoxAlwaysonTop.TabIndex = [System.Int32]11
-$CheckBoxAlwaysonTop.Text = [System.String]'Always on Top'
-$CheckBoxAlwaysonTop.UseCompatibleTextRendering = $true
-$CheckBoxAlwaysonTop.UseVisualStyleBackColor = $true
-#
-#CheckBoxFullscreen
-#
-$CheckBoxFullscreen.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]304))
-$CheckBoxFullscreen.Name = [System.String]'CheckBoxFullscreen'
-$CheckBoxFullscreen.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]176,[System.Int32]24))
-$CheckBoxFullscreen.TabIndex = [System.Int32]12
-$CheckBoxFullscreen.Text = [System.String]'Fullscreen'
-$CheckBoxFullscreen.UseCompatibleTextRendering = $true
-$CheckBoxFullscreen.UseVisualStyleBackColor = $true
-#
-#ButtonDownload
-#
-$ButtonDownload.Font = (New-Object -TypeName System.Drawing.Font -ArgumentList @([System.String]'Tahoma',[System.Single]16.2,[System.Drawing.FontStyle]::Regular,[System.Drawing.GraphicsUnit]::Point,([System.Byte][System.Byte]0)))
-$ButtonDownload.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]8,[System.Int32]297))
-$ButtonDownload.Name = [System.String]'ButtonDownload'
-$ButtonDownload.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]384,[System.Int32]86))
-$ButtonDownload.TabIndex = [System.Int32]20
-$ButtonDownload.Text = [System.String]'DOWNLOAD SCRCPY'
-$ButtonDownload.UseCompatibleTextRendering = $true
-$ButtonDownload.UseVisualStyleBackColor = $true
+$CheckBoxStayAwake.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]3,[System.Int32]334))
+$CheckBoxStayAwake.Name = [System.String]'CheckBoxStayAwake'
+$CheckBoxStayAwake.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]176,[System.Int32]24))
+$CheckBoxStayAwake.TabIndex = [System.Int32]13
+$CheckBoxStayAwake.Text = [System.String]'Stay Awake'
+$CheckBoxStayAwake.UseCompatibleTextRendering = $true
+$CheckBoxStayAwake.UseVisualStyleBackColor = $true
 #
 #FormScrcpy
 #
@@ -595,6 +607,7 @@ Add-Member -InputObject $FormScrcpy -Name TextBoxWindowTitle -Value $TextBoxWind
 Add-Member -InputObject $FormScrcpy -Name LabelWindowTitle -Value $LabelWindowTitle -MemberType NoteProperty
 Add-Member -InputObject $FormScrcpy -Name ButtonConnect -Value $ButtonConnect -MemberType NoteProperty
 Add-Member -InputObject $FormScrcpy -Name PanelPositionAndSize -Value $PanelPositionAndSize -MemberType NoteProperty
+Add-Member -InputObject $FormScrcpy -Name CheckBoxStayAwake -Value $CheckBoxStayAwake -MemberType NoteProperty
 Add-Member -InputObject $FormScrcpy -Name CheckBoxFullscreen -Value $CheckBoxFullscreen -MemberType NoteProperty
 Add-Member -InputObject $FormScrcpy -Name CheckBoxAlwaysonTop -Value $CheckBoxAlwaysonTop -MemberType NoteProperty
 Add-Member -InputObject $FormScrcpy -Name CheckBoxBorderless -Value $CheckBoxBorderless -MemberType NoteProperty

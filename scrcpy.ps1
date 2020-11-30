@@ -8,15 +8,19 @@
 #Dev: https://miners.win
 #Special Thanks to Joly0!
 
-$MyDir = Split-Path $script:MyInvocation.MyCommand.Path
-Set-Location $MyDir
-
-$scrcpypath = "$($MyDir)\scrcpy\scrcpy.exe"
-$adbpath = "$($MyDir)\scrcpy\adb.exe"
+$scrcpypath = ".\scrcpy\scrcpy.exe"
+$adbpath = ".\scrcpy\adb.exe"
 
 Add-Type -AssemblyName System.Windows.Forms
 
 . (Join-Path $PSScriptRoot 'scrcpy.designer.ps1')
+
+$SupportClick = [System.Windows.Forms.MessageBox]::Show("Do you want to support us?`nA few browser tabs will open, you don't have to do anything.","Scrcpy Desktop Client by TGF",1)
+if ($SupportClick = "OK"){
+    explorer "https://youtu.be/ftVBV-XmAP4"
+    explorer "https://amzn.to/3dX3I7x"
+    explorer "https://youtu.be/78DBNzVExPw"
+}
 
 $TextBoxWindowTitle.Text = "Scrcpy"
 $Gedownloaded = Test-Path .\scrcpy\
@@ -164,7 +168,7 @@ function Get-ScrcpyConsoleArguments {
         }
         $ConsoleArguments += "--record $($settings.Filepath)"
     }
-    if ($IP -ne "") {
+    if ($IP -ne $null) {
         $ConsoleArguments += "--serial $($settings.IP)"
     }
     if ($TextBoxWindowX.Enabled) {
@@ -179,25 +183,33 @@ function Get-ScrcpyConsoleArguments {
     if ($CheckBoxFullscreen.Checked) {
         $ConsoleArguments += "--fullscreen"
     }
+    if ($CheckBoxStayAwake.Checked){
+        $ConsoleArguments += "--stay-awake"
+    }
 
     $LabelConnectionString.Text = "$ConsoleArguments"
     return $ConsoleArguments
 }
 
 function Connect {
+    Start-Process -FilePath .\scrcpy\adb.exe -ArgumentList "disconnect"
+    Start-Process -FilePath .\scrcpy\adb.exe -ArgumentList "kill-server"
+    Start-Sleep 3
 	if ($TextBoxIP.Text -eq "") {
+        [System.Windows.Forms.MessageBox]::Show("Please Connect your Phone with your PC, make shure ADB is aktivated, Allow your PC if MessageBox Pops Up","Connect your Smartphone with your PC",1)
         $ScrcpyArguments = Get-ScrcpyConsoleArguments
 		Write-Host "$ScrcpyArguments"
 		Start-Process -FilePath $scrcpypath -ArgumentList $ScrcpyArguments
     }else{
+        [System.Windows.Forms.MessageBox]::Show("Please Connect your Phone with your PC, make shure ADB is aktivated, Allow your PC if MessageBox Pops Up","Connect your Smartphone with your PC",1)
 		$ScrcpyArguments = Get-ScrcpyConsoleArguments
 		Write-Host "$ScrcpyArguments"
 		Start $adbpath devices
-		[System.Windows.Forms.MessageBox]::Show("Accept Connection if your Device asks for it","Connect your Smartphone with your PC",1)
 		.\scrcpy\adb.exe tcpip 5555
-		.\scrcpy\adb.exe connect (-join"$TextBoxIP.Text" + ":5555")
+        .\scrcpy\adb.exe connect (-join"$TextBoxIP.Text" + ":5555")
+        Start-Sleep 3
 		.\scrcpy\adb.exe connect $TextBoxIP.Text
-		[System.Windows.Forms.MessageBox]::Show("Disconnect your Smartphone from your PC")
+		[System.Windows.Forms.MessageBox]::Show("You can now safely Dissconnect your Smartphone from your PC","Connect your Smartphone with your PC",1)
 		Start-Process -FilePath '.\scrcpy\scrcpy.exe' -ArgumentList $ScrcpyArguments
 	}
 }
