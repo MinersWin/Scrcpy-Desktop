@@ -1,5 +1,5 @@
-﻿#MinersWin 2020
-#23.10.2020
+﻿#MinersWin 2021
+#20.01.2021
 #https://miners.win
 #Tutorial: https://youtube.com/minerswin
 #YouTube: https://youtube.com/TheGeekFreaks
@@ -15,11 +15,12 @@ Add-Type -AssemblyName System.Windows.Forms
 
 . (Join-Path $PSScriptRoot 'scrcpy.designer.ps1')
 
-$SupportClick = [System.Windows.Forms.MessageBox]::Show("Do you want to support us?`nA few browser tabs will open, you don't have to do anything.","Scrcpy Desktop Client by TGF",1)
-if ($SupportClick = "OK"){
+$SupportClick = [System.Windows.Forms.MessageBox]::Show("Do you want to support us?`nA few browser tabs will open, you don't have to do anything.","Scrcpy Desktop Client by TGF",'YesNoCancel','Information')
+if ($SupportClick -ne "NO"){
     explorer "https://youtu.be/ftVBV-XmAP4"
     explorer "https://amzn.to/3dX3I7x"
     explorer "https://youtu.be/78DBNzVExPw"
+    explorer "https://paypal.me/minerswin"
 }
 
 $TextBoxWindowTitle.Text = "Scrcpy"
